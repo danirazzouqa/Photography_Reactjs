@@ -1,17 +1,14 @@
 import React from 'react';
 import Profile from '../Assets/Profile.png';
 import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import NavLinksBar from './NavLinksBar';
 
 const About = () => {
   return (
     <div name="about" className="w-full h-full bg-slate-100">
+      <NavLinksBar />
       <div className="w-full h-full">
         <div className="w-full h-[100px]">
-          <div className="p-8 md:py-12 justify-center text-center">
-            <p className="text-3xl md:text-4xl font-bold inline border-b-4 border-gray-300">
-              About
-            </p>
-          </div>
         </div>
         <div className="h-full grid grid-cols-1 md:grid-cols-2 md:flex md:mt-32 ml-4 md:ml-10 lg:justify-center items-center bg-slate-100 mr-10">
           <div className="text-3xl md:text-4xl p-4 md:p-8 w-[100%] md:w-[300px] text-center md:text-left lg:justify-center items-center lg:border-r-2 lg:border-block md:border-r-2 md:border-block  ">

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
@@ -12,4 +13,29 @@
       @apply px-4;
       @apply cursor-pointer
   }
+}
+
+.hide-images {
+  display: none;
+}
+
+/* Styles for the image container */
+.image-frame {
+  width: 300px; /* Set your desired container width */
+  height: 200px; /* Set your desired container height */
+  overflow: hidden; /* Hide overflow to clip the image */
+}
+
+/* Styles for the zoomed image */
+.zoomed-image {
+  width: 100%; /* Ensure the image fills the container width */
+  height: 100%; /* Ensure the image fills the container height */
+  transform: scale(1.2); /* Adjust the scale factor for zoom effect */
+  transform-origin: center center; /* Zoom from the center */
+  transition: transform 0.3s; /* Add a smooth transition effect */
+}
+
+/* On hover, apply the zoom effect */
+.image-frame:hover .zoomed-image {
+  transform: scale(1.5); /* Adjust the scale factor for zoom effect on hover */
 }

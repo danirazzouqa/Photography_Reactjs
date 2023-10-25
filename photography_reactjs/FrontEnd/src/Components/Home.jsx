@@ -27,7 +27,7 @@ const Home = () => {
   }, [index]);
 
   return (
-    <div name='home' className='w-full h-screen' style={containerStyle}>
+    <div  className='w-full h-screen' style={containerStyle}>
       <div className='mx-auto flex items-center justify-center w-full h-full '>
         <h2 className='text-xl sm:text-xl md:text-2xl lg:text-5xl font-bold text-orange-300'>
           {text}
