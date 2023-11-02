@@ -16,7 +16,7 @@ const DesktopNav = () => (
       </Link>
     </li>
     <li>
-      <Link to="/projects" smooth="true" duration={500}>
+      <Link to="/Gallery" smooth="true" duration={500}>
         Gallery 
       </Link>
     </li>

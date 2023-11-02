@@ -22,9 +22,9 @@ const DesktopNav = () => (
       </Link>
     </li>
     <li>
-      <Link to="projects" smooth="true" duration={500}>
+      <a href="/Gallery" smooth="true" duration={500}>
         Gallery 
-      </Link>
+      </a>
     </li>
     <li>
     <a href="/contact">Contact</a>

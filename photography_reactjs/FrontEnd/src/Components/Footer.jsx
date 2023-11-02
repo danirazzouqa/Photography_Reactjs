@@ -8,7 +8,7 @@ import Logo from '../Assets/Logo2.png';
 
 const Footer = () => {
   return (
-    <div className='bg-black'>
+    <div className='bg-black  '>
     <div className='max-w-[1240px] mx-auto py-12 px-4 grid lg:grid-cols-3  text-gray-300'>
       <div>
       <img src={Logo} alt="logo" style={{ width: '50px' }} />

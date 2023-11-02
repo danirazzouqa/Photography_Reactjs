@@ -7,6 +7,8 @@ import Gallery from './Components/Gallery';
 import Projects from './Components/Projects';
 import Contact from './Components/Contact';
 import ImgUploader from './Components/ImgUploader';
+import GalleryPage from './Components/Gallery/GalleryPage.jsx';
+
 
 function App() {
   // Get the current location using useLocation
@@ -24,6 +26,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/ImgUploader" element={<ImgUploader />} />
+        <Route path="/gallery/:categoryName" element={<GalleryPage />} />
       </Routes>
 
       {/* Conditionally render the Footer based on the hideFooter variable */}

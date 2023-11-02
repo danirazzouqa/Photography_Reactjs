@@ -1,21 +1,34 @@
 const express = require('express');
-const {uploadImage,getImage,getImages,updateimage,deleteImage} = require('../controllers/imageController.jsx')
-
 const router = express.Router();
+const Image = require('../models/imageModel.jsx'); // Import your Image model
 
-//get all images
-router.get('/', getImages )
+router.get('/',  async (req, res) => {
+    const { categoryName } = req.query;
+    try {
+      // Query the database for images with the specified category
+      const images = await Image.find({category: categoryName});
+  
+      if (images.length > 0) {
+        res.json(images);
+      } else {
+        res.status(404).json({ error: 'Images not found for the specified category' });
+      }
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      res.status(500).json({ error: 'An error occurred while fetching images' });
+    }
+  });
 
-//get a single image
-router.get('/:id', getImage)
-
-//post a new image
-router.post('/', uploadImage)
-
-//delete image
-router.delete('/:id', deleteImage)
-
-//update image
-router.patch('/:id', updateimage)
-
-module.exports = router 
+  router.get('/', async (req, res) => {
+    try {
+      const { categoryName } = req.query;
+      console.log('Category Name:', categoryName);
+  
+      // ... rest of the code
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      res.status(500).json({ error: 'An error occurred while fetching images' });
+    }
+  });
+  
+  module.exports = router;

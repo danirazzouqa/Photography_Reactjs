@@ -2,10 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const imagesRoutes = require('./routes/images.jsx')
+
 const multer = require('multer');
 const categoriesRouter = require('./routes/categories.jsx');
 const uploadRouter = require('./routes/Upload.jsx');
+const imagesRouter = require('./routes/images.jsx')
 
 
 
@@ -17,9 +18,10 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
+
 app.use('/uploads', express.static('uploads'));
+app.use('/images' ,imagesRouter)
 app.use('/categories', categoriesRouter);
-app.use('/Images/', imagesRoutes)
 app.use('/upload/', uploadRouter)
 
 
