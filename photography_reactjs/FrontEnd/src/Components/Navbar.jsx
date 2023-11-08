@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <div className='fixed w-full h-[40px] flex items-center justify-between'>
       <div>
-        <img  src={Logo} alt="logo" style={{ width: '50px' }} />
+        <img className='cursor-pointer' src={Logo} alt="logo" style={{ width: '50px' }} />
       </div>
 
       <DesktopNav />

@@ -15,9 +15,14 @@ const DesktopNav = () => (
         About
       </Link>
     </li>
-    <li>
+     <li>
       <Link to="/Gallery" smooth="true" duration={500}>
         Gallery 
+      </Link>
+    </li>
+    <li>
+      <Link to="/blog" smooth="true" duration={500}>
+        Blog
       </Link>
     </li>
     <li>
@@ -42,10 +47,10 @@ const NavLinksBar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className='fixed w-full h-[40px] flex items-center justify-between'>
-      <div>
+    <div className='fixed w-full h-[40px] flex items-center justify-between '>
+      <div className='cursor-pointer'>
         <Link to="/"> {/* Use Link for the logo */}
-          <img src={Logo} alt="logo" style={{ width: '50px' }} />
+          <img  src={Logo} alt="logo" style={{ width: '50px' }} />
         </Link>
       </div>
 

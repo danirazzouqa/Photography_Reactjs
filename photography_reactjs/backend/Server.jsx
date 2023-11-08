@@ -7,6 +7,8 @@ const multer = require('multer');
 const categoriesRouter = require('./routes/categories.jsx');
 const uploadRouter = require('./routes/Upload.jsx');
 const imagesRouter = require('./routes/images.jsx')
+const BlogsRouter = require('./routes/blog.jsx')
+
 
 
 
@@ -23,6 +25,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/images' ,imagesRouter)
 app.use('/categories', categoriesRouter);
 app.use('/upload/', uploadRouter)
+app.use("/blogs/", BlogsRouter) 
 
 
 

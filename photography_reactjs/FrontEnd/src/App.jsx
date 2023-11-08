@@ -7,7 +7,9 @@ import Gallery from './Components/Gallery';
 import Projects from './Components/Projects';
 import Contact from './Components/Contact';
 import ImgUploader from './Components/ImgUploader';
+import Blog from './Components/blog';
 import GalleryPage from './Components/Gallery/GalleryPage.jsx';
+import BlogUploader from './Components/BlogUploader';
 
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/ImgUploader" element={<ImgUploader />} />
+        <Route path="/BlogUploader" element={<BlogUploader />} />
         <Route path="/gallery/:categoryName" element={<GalleryPage />} />
       </Routes>
 

@@ -45,12 +45,12 @@ function Projects() {
             <p className="font-serif text-base md:text-lg py-4">
               "Every place holds a story, whispered through its very essence. It's in the rustling leaves, the cobblestone streets, and the starry nights. These stories, hidden yet waiting to be discovered, weave the rich tapestry of our world."
             </p>
-            <button className="group shadow-lg shadow-black px-6 py-3 my-2 flex items-center bg-gray-300 hover:border-gray-300">
+            <a href='/blog' className="group shadow-lg shadow-black w-[200px] px-6 py-3 my-2 flex items-center bg-gray-300 hover:border-gray-300">
               View Blog
               <span className="group-hover:scale-125 group-hover-text-blue-400 duration-300">
                 <HiArrowNarrowRight className="ml-3" />
               </span>
-            </button>
+            </a>
           </div>
           <div className="lg:w-[50%] ml-8 p-4 md:p-8">
             <img
