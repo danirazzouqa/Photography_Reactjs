@@ -39,29 +39,39 @@ function GalleryPage() {
           Back to All Gallery
         </a>
         <div className="grid gap-y-10 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`${
-                image.width / image.height > 1
-                  ? "md:col-span-2"
-                  : "md:col-span-1"
-              } h-[650px] my-8`}
-              onClick={() => openImageModal(image)}
-            >
-              <img
-                src={`http://localhost:4000/uploads/${image.originalFileName}`}
-                alt={image.originalFileName}
-                className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer"
-              />
-            </div>
-          ))}
+          {images.map((image, index) => {
+            // Calculate aspect ratio (width / height)
+            const aspectRatio = image.width / image.height;
+
+            // Define dynamic CSS classes based on aspect ratio
+            const imageClasses = aspectRatio > 1
+              ? "w-full h-screen"  // Landscape image
+              : "md:col-span-1";   // Portrait image (show 2 grids)
+              console.log("Aspect Ratio:", aspectRatio);
+              console.log("Image Classes:", imageClasses);
+            return (
+              image.originalFileName ? (
+                <div
+                  key={index}
+                  className={`h-[650px] my-8 ${imageClasses}`}
+                  onClick={() => openImageModal(image)} // Open modal on click
+                >
+                  
+                  <img
+                    src={`http://localhost:4000/uploads/${image.originalFileName}`}
+                    alt={image.originalFileName}
+                    className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer"
+                  />
+                </div>
+              ) : null
+            );
+          })}
         </div>
       </div>
 
       {selectedImage && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70 z-50">
-          <div className="max-w-7xl max-h-2xl h-screen p-4 bg-transparent">
+          <div className="max-w-7xl max-h-2xl  h-screen p-4  bg-transparent ">
             <img
               src={`http://localhost:4000/uploads/${selectedImage.originalFileName}`}
               alt={selectedImage.originalFileName}
@@ -69,7 +79,7 @@ function GalleryPage() {
             />
             <button
               onClick={closeImageModal}
-              className="text-white hover-text-red-700 text-2xl absolute top-4 right-4 cursor-pointer"
+              className="text-white hover:text-red-700 text-2xl absolute top-4 right-4 cursor-pointer"
             >
               <FaTimes />
             </button>
@@ -79,5 +89,4 @@ function GalleryPage() {
     </div>
   );
 }
-
 export default GalleryPage;

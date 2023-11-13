@@ -27,6 +27,11 @@ const DesktopNav = () => (
       </a>
     </li>
     <li>
+      <a href="/Prints" smooth="true" duration={500}>
+        Prints 
+      </a>
+    </li>
+    <li>
     <a href="/contact">Contact</a>
     </li>
   </ul>

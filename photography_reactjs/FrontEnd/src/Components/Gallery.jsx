@@ -3,7 +3,7 @@ import axios from 'axios';
 import NavLinksBar from './NavLinksBar';
 import { Link } from 'react-router-dom';
 
-function TakeQuiz() {
+function Gallery() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -50,4 +50,4 @@ function TakeQuiz() {
   );
 }
 
-export default TakeQuiz;
+export default Gallery;

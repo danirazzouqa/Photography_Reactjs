@@ -9,7 +9,9 @@ import Contact from './Components/Contact';
 import ImgUploader from './Components/ImgUploader';
 import Blog from './Components/blog';
 import GalleryPage from './Components/Gallery/GalleryPage.jsx';
+import PrintPage from './Components/Gallery/PrintPage.jsx';
 import BlogUploader from './Components/BlogUploader';
+import Prints from './Components/Prints';
 
 
 function App() {
@@ -28,9 +30,11 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/prints" element={<Prints />} />
         <Route path="/ImgUploader" element={<ImgUploader />} />
         <Route path="/BlogUploader" element={<BlogUploader />} />
         <Route path="/gallery/:categoryName" element={<GalleryPage />} />
+        <Route path="/prints/:printName" element={<PrintPage />} />
       </Routes>
 
       {/* Conditionally render the Footer based on the hideFooter variable */}
