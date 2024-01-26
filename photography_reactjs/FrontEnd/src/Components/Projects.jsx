@@ -10,7 +10,7 @@ function Projects() {
   
 
   return (
-    <div name="projects" className="w-full h-full bg-slate-100">
+    <div id="projects" className="w-full h-full bg-slate-100">
       <NavLinksBar />
       <div className="w-full h-full">
         <div className="w-full h-[100px]"></div>

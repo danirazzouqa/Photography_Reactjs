@@ -2,63 +2,70 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function ImgUploader() {
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]); // Change to an array
   const [categoryName, setCategoryName] = useState('');
-  const [originalFileName, setOriginalFileName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState('');
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFiles = Array.from(e.target.files); // Create an array from the FileList
+    if (selectedFiles.every(file => file.type.startsWith('image/'))) {
+      setFiles(selectedFiles);
+      setUploadStatus('');
+    } else {
+      setUploadStatus('Please select only image files.');
+      setFiles([]);
+    }
   };
-
   const handleCategoryChange = (e) => {
     setCategoryName(e.target.value);
   };
 
-  const handleOriginalFileNameChange = (e) => {
-    setOriginalFileName(e.target.value);
+  const resetForm = () => {
+    setFiles(null);
+    setCategoryName('');
+    setUploadStatus('');
+    setIsLoading(false);
   };
-  
 
   const handleFileUpload = () => {
-    if (file && categoryName && originalFileName) {
-      // Create a new FormData object
+    if (files.length > 0 && categoryName) {
+      setIsLoading(true);
       const formData = new FormData();
 
-      // Append the file, category name, and original file name to the FormData
-      formData.append('file', file);
+      files.forEach(file => {
+        formData.append('files', file); // Append each file to formData
+      });
       formData.append('categoryName', categoryName);
-      formData.append('originalFileName', originalFileName);
 
-      // Send the FormData to the server for storage
-      axios
-        .post('http://localhost:4000/upload', formData)
-        .then((response) => {
-          console.log(response.data.message);
+      axios.post('http://localhost:4000/upload', formData)
+        .then(response => {
+          setUploadStatus('Images uploaded successfully!');
+          resetForm();
         })
-        .catch((error) => {
-          console.error('Error uploading file:', error);
+        .catch(error => {
+          setUploadStatus(error.response?.data?.message || 'Error uploading files. Please try again.');
+          setIsLoading(false);
         });
     } else {
-      console.log('Please fill in all required fields.');
+      setUploadStatus('Please fill in all required fields and select at least one image.');
     }
   };
 
   return (
-    <div className="ImgUploader absolute left-[20%] top-[20%]">
+    <div className="ImgUploader absolute left-[20%] top-[20%] p-4 bg-white shadow-lg rounded">
       <h1>Image Uploader</h1>
-      <input type="file" onChange={handleFileChange} />
+      <input type="file" multiple onChange={handleFileChange} />
       <input
         type="text"
         placeholder="Category Name"
+        value={categoryName}
         onChange={handleCategoryChange}
       />
-      <input
-        type="text"
-        placeholder="Original File Name"
-        value={originalFileName}
-        onChange={handleOriginalFileNameChange} // Capture the user's input for original file name
-      />
-      <button onClick={handleFileUpload}>Upload Image</button>
+      <button onClick={handleFileUpload} disabled={isLoading}>
+        {isLoading ? 'Uploading...' : 'Upload Images'}
+      </button>
+      {uploadStatus && <p>{uploadStatus}</p>}
     </div>
   );
 }

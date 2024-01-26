@@ -5,7 +5,7 @@ import NavLinksBar from './NavLinksBar';
 
 const About = () => {
   return (
-    <div name="about" className="w-full h-full bg-slate-100">
+    <div id="about" className="w-full h-full bg-slate-100">
       <NavLinksBar />
       <div className="w-full h-full">
         <div className="w-full h-[100px]">

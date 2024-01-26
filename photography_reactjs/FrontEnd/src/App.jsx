@@ -12,6 +12,9 @@ import GalleryPage from './Components/Gallery/GalleryPage.jsx';
 import PrintPage from './Components/Gallery/PrintPage.jsx';
 import BlogUploader from './Components/BlogUploader';
 import Prints from './Components/Prints';
+import SignIn from './Components/SignIn.jsx';
+import Signup from './Components/Signup.jsx';
+import WelcomePage from './Components/WelcomePage.jsx';
 
 
 function App() {
@@ -30,8 +33,11 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/Signup" element={<Signup/>} />
         <Route path="/prints" element={<Prints />} />
         <Route path="/ImgUploader" element={<ImgUploader />} />
+        <Route path="/WelcomePage" element={<WelcomePage />} />
         <Route path="/BlogUploader" element={<BlogUploader />} />
         <Route path="/gallery/:categoryName" element={<GalleryPage />} />
         <Route path="/prints/:printName" element={<PrintPage />} />

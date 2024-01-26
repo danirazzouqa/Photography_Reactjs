@@ -2,13 +2,13 @@ import React from 'react'
 import About from './Components/About';
 import Projects from './Components/Projects';
 import Home from './Components/Home';
-import Navbar from './Components/Navbar';
+import NavLinksBar from './Components/NavLinksBar';
 
 function Hero() {
   return (
     <div name='Hero'>
       
-        <Navbar />
+        <NavLinksBar />
         <Home />
         <About />
         <Projects />
