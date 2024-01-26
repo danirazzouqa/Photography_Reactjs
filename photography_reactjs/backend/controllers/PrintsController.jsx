@@ -22,17 +22,18 @@ const PostPrints = async (req, res) => {
   // Route to get a list of categories
   const getPrints = async (req, res) => {
     try {
-      // Fetch all categories including the "image" field
-      const prints = await Print.find({}, { _id: 0, __v: 0  });
+      const printName = req.query.printName;
+      const query = printName ? { name: printName } : {};
+      const prints = await Print.find(query, { _id: 0, __v: 0 });
   
       if (prints.length > 0) {
         res.json(prints);
       } else {
-        res.status(404).json({ error: 'Categories not found' });
+        res.status(404).json({ error: 'Print not found' });
       }
     } catch (err) {
-      console.error('Error fetching categories:', err);
-      res.status(500).json({ error: 'An error occurred while fetching categories' });
+      console.error('Error:', err);
+      res.status(500).json({ error: 'An error occurred' });
     }
   }
   

@@ -1,10 +1,10 @@
-// models/imageModel.js
 const mongoose = require('mongoose');
 
 const imageSchema = new mongoose.Schema({
   category: String,
   originalFileName: String,
-},{timestamps : true} );
+  imageFileName: String, // Name of the processed (WebP) image file
+},{ timestamps: true });
 
 const Image = mongoose.model('Image', imageSchema);
 

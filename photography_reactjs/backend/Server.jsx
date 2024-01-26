@@ -1,14 +1,14 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const multer = require('multer');
 const categoriesRouter = require('./routes/categories.jsx');
 const uploadRouter = require('./routes/Upload.jsx');
 const imagesRouter = require('./routes/images.jsx')
 const BlogsRouter = require('./routes/blog.jsx')
-const PrintsRouter = require('./routes/Prints.jsx');
+const PrintsRouter = require('./routes/Prints.jsx')
+const UserRoutes = require('./routes/userRoutes.jsx')
 
 
 
@@ -28,6 +28,7 @@ app.use('/categories', categoriesRouter);
 app.use('/upload/', uploadRouter)
 app.use("/blogs/", BlogsRouter) 
 app.use('/prints', PrintsRouter);
+app.use('/users', UserRoutes);
 
 
 

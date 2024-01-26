@@ -4,32 +4,33 @@ const upload = require('../multer-config.jsx');
 const mongoose = require('mongoose');
 const Image = require('../models/imageModel.jsx');
 
-router.post('/', upload.single('file'), async (req, res) => {
+router.post('/', upload.array('files', 5), async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No files uploaded' });
     }
 
-    // Create a schema for the uploaded image and save it to MongoDB
-    const image = new Image({
-      category: req.body.categoryName, // Assuming you pass the category name in the request body
-      originalFileName: req.file.originalname,
-    });
+    const uploadedImages = [];
 
-    const savedImage = await image.save();
+    for (const file of req.files) {
+      // Create a schema for each uploaded image and save it to MongoDB
+      const image = new Image({
+        category: req.body.categoryName, // Assuming you pass the category name in the request body
+        originalFileName: file.originalname,
+      });
+
+      const savedImage = await image.save();
+      uploadedImages.push(savedImage);
+    }
 
     res.status(200).json({
-      message: 'File uploaded successfully',
-      filename: req.file.originalname,
-      savedImage: savedImage,
+      message: 'Files uploaded successfully',
+      uploadedImages: uploadedImages,
     });
   } catch (error) {
-    console.error('Error uploading file:', error);
-    res.status(500).json({ error: 'An error occurred while uploading the file' });
+    console.error('Error uploading files:', error);
+    res.status(500).json({ error: 'An error occurred while uploading the files' });
   }
 });
-
-
-
 
 module.exports = router;
