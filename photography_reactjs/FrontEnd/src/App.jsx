@@ -15,14 +15,18 @@ import Prints from './Components/Prints';
 import SignIn from './Components/SignIn.jsx';
 import Signup from './Components/Signup.jsx';
 import WelcomePage from './Components/WelcomePage.jsx';
+import PrintUploader from './Components/PrintUploader.jsx';
 
 
 function App() {
   // Get the current location using useLocation
   const location = useLocation();
 
-  // Check if the current location is not "/ImgUploader"
-  const hideFooter = location.pathname === '/ImgUploader';
+  // Define an array of paths where the footer should be hidden
+  const pathsToHideFooter = ['/ImgUploader', '/BlogUploader', '/PrintUploader'];
+
+  // Check if the current location is in the pathsToHideFooter array
+  const showFooter = !pathsToHideFooter.includes(location.pathname);
 
   return (
     <div>
@@ -38,13 +42,14 @@ function App() {
         <Route path="/prints" element={<Prints />} />
         <Route path="/ImgUploader" element={<ImgUploader />} />
         <Route path="/WelcomePage" element={<WelcomePage />} />
+        <Route path="/PrintUploader" element={<PrintUploader />} />
         <Route path="/BlogUploader" element={<BlogUploader />} />
         <Route path="/gallery/:categoryName" element={<GalleryPage />} />
         <Route path="/prints/:printName" element={<PrintPage />} />
       </Routes>
 
       {/* Conditionally render the Footer based on the hideFooter variable */}
-      {!hideFooter && <Footer />}
+      {showFooter && <Footer />}
     </div>
   );
 }

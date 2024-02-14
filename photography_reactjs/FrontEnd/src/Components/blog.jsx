@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import NavLinksBar from './NavLinksBar';
 import { FaTimes } from 'react-icons/fa';
+import { AuthContext } from '../context/AuthContext';
 
 function Blog() {
   const [blogPosts, setBlogPosts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const { user } = useContext(AuthContext);
+  const role = user?.role;
 
   useEffect(() => {
-    // Fetch data from your API
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = () => {
     axios.get('http://localhost:4000/blogs')
       .then((response) => {
-        setBlogPosts(response.data); // Assuming the response data is an array of blog posts
+        setBlogPosts(response.data);
       })
       .catch((error) => {
         console.error('Error fetching blog posts:', error);
       });
-  }, []); // The empty dependency array ensures this effect runs once when the component mounts
+  };
 
   const openImageModal = (image) => {
     setSelectedImage(image);
@@ -26,23 +32,121 @@ function Blog() {
     setSelectedImage(null);
   };
 
+  const handleDeletePost = (id) => {
+    if (role === 'admin') {
+      axios.delete(`http://localhost:4000/blogs/${id}`)
+        .then((response) => {
+          fetchPosts();
+        })
+        .catch((error) => {
+          console.error('Error deleting post:', error);
+        });
+    }
+  };
+
+  const handleBlogPostSubmit = async (formData) => {
+    try {
+      const response = await axios.post('http://localhost:4000/blogs', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Blog post created:', response.data);
+      fetchPosts(); // Fetch the updated list of blog posts after submission
+    } catch (error) {
+      console.error('Error creating a blog post:', error);
+    }
+  };
+
+  // Define the BlogPostForm directly within the Blog component
+  const BlogPostForm = () => {
+    const [file, setFile] = useState(null);
+    const [story, setStory] = useState('');
+    const [title, setTitle] = useState('');
+
+    const handleFileChange = (e) => {
+      setFile(e.target.files[0]);
+    };
+
+    const handleStoryChange = (e) => {
+      setStory(e.target.value);
+    };
+
+    const handleTitleChange = (e) => {
+      setTitle(e.target.value);
+    };
+
+    const handleFormSubmit = async () => {
+      if (!file || !story || !title) {
+        console.log('Please select an image, write a story, and provide a title.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('story', story);
+      formData.append('title', title);
+
+      try {
+        await handleBlogPostSubmit(formData); // Call the handleBlogPostSubmit function defined in the Blog component
+      } catch (error) {
+        console.error('Error creating a blog post:', error);
+      }
+    };
+
+    return (
+      <div className='container justify-center items-center text-center mt-12'>
+        <h2>Create a Blog Post</h2>
+        <input className='mb-12 justify-between items-center text-center' type="file" onChange={handleFileChange} />
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={handleTitleChange}
+          className='w-[600px] mb-4'
+        />
+        <textarea
+          placeholder="Write your story here..."
+          value={story}
+          onChange={handleStoryChange}
+          className='w-[600px] h-[200px]'
+        ></textarea>
+        <button className='px-6' onClick={handleFormSubmit}>Submit</button>
+      </div>
+    );
+  };
+
   return (
     <div className='w-full h-full bg-slate-100'>
       <NavLinksBar />
-      <div className="container w-full h-full mx-auto p-4 md:p-6 lg:p-8">
-        <h1 className="w-full h-full text-4xl font-serif font-semibold my-8">Blogs</h1>
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 ">
+        <h2 className="w-full h-full text-4xl font-serif font-semibold my-8">Blogs</h2>
+        {role === 'admin' && <BlogPostForm />} {/* Render BlogPostForm for admin users */}
         <div className="">
           {blogPosts.map((post, index) => (
-            <div key={post._id} className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} border-b-2 p-6`}>
+            <div key={post._id} className={`flex flex-col md:flex-row border-b-2 border-gray-200 p-6  mb-8 text-center   ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
               <div
-                className={`h-[650px] mt-8`}
+                className={`h-[400px] md:w-1/2 my-8 md:mt-0`}
                 onClick={() => openImageModal(post.image)}
               >
-                <img className='w-[1200px] h-[400px] rounded-lg shadow-xl cursor-pointer object-cover' src={`http://localhost:4000/uploads/${post.image}`} alt="Blog Post" />
+                <img className='w-full h-full rounded-lg shadow-xl cursor-pointer object-cover 
+                ' src={`http://localhost:4000/uploads/${post.image}`} 
+                alt="Blog Post" />
+                {role === 'admin' && (
+                 <button
+                 className="text-red-600 p-2 hover:text-red-800"
+                 onClick={(event) => {
+                   event.stopPropagation(); // Prevent click event propagation
+                   handleDeletePost(post._id);
+                 }}
+               >
+                 Delete
+               </button>
+                )}
               </div>
-              <div className='w-full h-full'>
-                <h2 className='w-full justify-center text-center items-center font-bold text-2xl font-serif py-4'>{post.title}</h2>
-                <p className='w-full font-sans text-gray-500 text-center p-8'>{post.story}</p>
+              <div className='w-full h-full md:w-1/2 px-4 '>
+                <h2 className='font-bold text-2xl font-serif py-4 text-center '>{post.title}</h2>
+                <p className='font-sans text-gray-500 text-center '>{post.story}</p>
               </div>
             </div>
           ))}

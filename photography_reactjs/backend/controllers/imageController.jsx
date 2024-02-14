@@ -73,20 +73,29 @@ const uploadImage = async (req, res) => {
 };
 
 //delete an image
-const deleteImage = async (req , res) => {
-    const { id } = req.params
+const deleteImage = async (req, res) => {
+  const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'no such image'})
-    }
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'Invalid image ID' });
+  }
 
-    const image = await Image.findOneAndDelete({_id: id})
+  try {
+    const image = await Image.findById(id);
 
     if (!image) {
-        return res.status(404).json({error: 'no such image'})
+      return res.status(404).json({ error: 'Image not found' });
     }
-        res.status(200).json(image)
-}
+
+    await image.remove();
+
+    res.status(200).json({ message: 'Image deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    res.status(500).json({ error: 'An error occurred while deleting the image' });
+  }
+};
+
 
 
 //update image

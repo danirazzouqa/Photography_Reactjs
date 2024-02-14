@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer'); // For handling file uploads
-const {BlogGet,BlogPost} = require('../controllers/BlogController.jsx');
+const { BlogGet, BlogPost, BlogDelete } = require('../controllers/BlogController.jsx');
+const multer = require('multer');
 const path = require('path');
+
 
 // Set up Multer for handling file uploads
 const storage = multer.diskStorage({
@@ -21,5 +22,8 @@ router.post('/', upload.single('file'), BlogPost);
 
 // Route to get a list of blog posts
 router.get('/', BlogGet);
+
+// Route to delete a blog post by ID
+router.delete('/:id', BlogDelete);
 
 module.exports = router;

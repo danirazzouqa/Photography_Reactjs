@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const PrintSchema = new mongoose.Schema({
-  name: String,
-  imageFileName: String, 
-  description : String ,
-}, {timestamps : true});
+const printSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  imageFileName: { type: String, required: true },
+});
 
+const Print = mongoose.model('Print', printSchema);
 
-module.exports = mongoose.model('Print', PrintSchema);
+module.exports = Print;

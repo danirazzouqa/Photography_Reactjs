@@ -1,45 +1,21 @@
-const Print = require('../models/PrintsModel.jsx')
-const mongoose = require('mongoose')
+const Print = require('../models/PrintsModel.jsx');
 
-
-const PostPrints = async (req, res) => {
+// Controller function for uploading print details
+const uploadPrint = async (req, res) => {
   try {
-    const { name } = req.body;
-    const { description } = req.body;
-    const imageFileName = req.file ? req.file.filename : ''; // Get the uploaded image file name
-
+    const { name, description } = req.body;
+    const imageFileName = req.file.filename; // Get the filename of the uploaded image
     const print = new Print({ name, description, imageFileName });
     await print.save();
 
-    res.status(201).json(print);
+    // Log the print object to verify its structure
+    console.log('Print object:', print);
+
+    res.status(201).json({ message: 'Print details uploaded successfully' });
   } catch (error) {
-    console.error('Error creating category:', error);
-    res.status(500).json({ error: 'An error occurred while creating the category' });
+    console.error('Error uploading print details:', error);
+    res.status(500).json({ message: 'Error uploading print details. Please try again.' });
   }
-}
+};
 
-  
-  // Route to get a list of categories
-  const getPrints = async (req, res) => {
-    try {
-      const printName = req.query.printName;
-      const query = printName ? { name: printName } : {};
-      const prints = await Print.find(query, { _id: 0, __v: 0 });
-  
-      if (prints.length > 0) {
-        res.json(prints);
-      } else {
-        res.status(404).json({ error: 'Print not found' });
-      }
-    } catch (err) {
-      console.error('Error:', err);
-      res.status(500).json({ error: 'An error occurred' });
-    }
-  }
-  
-  
-
-
-  module.exports = {
-    PostPrints,getPrints,
-  }
+module.exports = { uploadPrint };

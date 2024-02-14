@@ -5,7 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const WelcomePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
   
   useEffect(() => {
     console.log(location.state); // This will log the state passed to the WelcomePage
@@ -20,10 +20,11 @@ const WelcomePage = () => {
 
   return (
     <div className="welcome-page">
-      <h1>Welcome, {user.username}!</h1>
+      {/* Use optional chaining to safely access the username property */}
+      <h1>Welcome, {user?.username}!</h1>
       <p>Redirecting to the gallery...</p>
     </div>
   );
 };
 
-export default WelcomePage 
+export default WelcomePage;

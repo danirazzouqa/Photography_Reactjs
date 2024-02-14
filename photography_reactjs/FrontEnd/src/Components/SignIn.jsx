@@ -1,28 +1,33 @@
 import React, { useState } from "react";
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiLogoFacebook } from "react-icons/bi";
 import NavLinksBar from "./NavLinksBar";
 import { useLogin } from "../hooks/useLogin";
 
-
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username] = useState('');
+  const [role] = useState('');
+  const [error, setError] = useState(null); // State to store frontend errors
   const navigate = useNavigate();
-  const { login ,error, isLoading } = useLogin();
- 
+  const { login, isLoading } = useLogin();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Login attempt:', { email, password });
+    setError(null); // Clear previous errors
     
-      await login(username , email , password);
+    try {
+      await login(username, email, password,role);
+      // If login is successful, navigate to WelcomePage
       navigate('/WelcomePage');
-    } 
+    } catch (error) {
+      // If there's a frontend error, set the error state
+      setError(error.message);
+    }
+  }
 
-    
   return (
     <div name="Sign in" className="w-full h-full bg-slate-100">
       <NavLinksBar />
@@ -33,25 +38,25 @@ const SignIn = () => {
         <div className="md:w-1/3 max-w-sm">
           <form onSubmit={handleSubmit}>
             <div className="text-center md:text-left">
-            <label className="mr-1">Sign in with</label>
-          <button
-            type="button"
-            className="mx-1 h-9 w-9  rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
-            <BiLogoFacebook
-              size={20}
-              className="flex justify-center items-center w-full"
-            />
-          </button>
-          <button
-            type="button"
-            className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
-            <AiOutlineTwitter
-              size={20}
-              className="flex justify-center items-center w-full"
-            />
-          </button>
+              <label className="mr-1">Sign in with</label>
+              <button
+                type="button"
+                className="mx-1 h-9 w-9  rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
+              >
+                <BiLogoFacebook
+                  size={20}
+                  className="flex justify-center items-center w-full"
+                />
+              </button>
+              <button
+                type="button"
+                className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
+              >
+                <AiOutlineTwitter
+                  size={20}
+                  className="flex justify-center items-center w-full"
+                />
+              </button>
             </div>
             <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
               <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
@@ -79,7 +84,7 @@ const SignIn = () => {
             >
               Login
             </button>
-            {isLoading && <div className="loading-spinner">{error}</div>}
+            {isLoading && <div className="loading-spinner">Loading...</div>}
             <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
               Don't have an account?{" "}
               <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/Signup">

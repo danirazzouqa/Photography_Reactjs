@@ -35,6 +35,28 @@ const BlogGet = async (req, res) => {
   }
 };
 
+const BlogDelete = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid blog post ID' });
+  }
+
+  try {
+    // Delete the blog post by ID using BlogPostModel
+    const deletedBlog = await BlogPostModel.findByIdAndDelete(id);
+
+    if (!deletedBlog) {
+      return res.status(404).json({ error: 'Blog post not found' });
+    }
+
+    res.status(200).json({ message: 'Blog post deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting blog post:', error);
+    res.status(500).json({ error: 'An error occurred while deleting the blog post' });
+  }
+};
+
 module.exports = {
-  BlogGet, BlogPost
+  BlogGet, BlogPost , BlogDelete
 };
