@@ -31,7 +31,7 @@ function Gallery() {
         {categories.map((category, index) => (
          <div key={index} className="rounded-lg text-center w-[300px] mx-auto">
          <Link to={`/Gallery/${category.name}`}>
-           <div className="relative group flex flex-col">
+           <div className="group flex flex-col">
              <img
                src={`http://localhost:4000/uploads/${category.imageFileName}`}
                alt={category.name}

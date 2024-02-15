@@ -1,38 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import HomeDesert from '../Assets/Home_Desert.jpg';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import Home1 from '../Assets/Desktop/Home_Desert.jpg';
+import Home2 from '../Assets/Desktop/Home2.jpg';
+import Home3 from '../Assets/Desktop/Home3.jpg';
+import Home4 from '../Assets/Desktop/Home4.webp';
+import mobile1 from '../Assets/Mobile/mobile.webp';
+import mobile2 from '../Assets/Mobile/mobile2.jpg';
+import mobile3 from '../Assets/Mobile/mobile3.jpg';
+import mobile4 from '../Assets/Mobile/mobile4.jpg';
+import mobile5 from '../Assets/Mobile/mobile5.webp';
+import mobile6 from '../Assets/Mobile/mobile6.jpg';
+
+const imagesMobile = [mobile6, mobile2, mobile3, mobile4, mobile5, mobile1];
+const imagesDesktop = [Home1, Home2, Home3, Home4];
 
 const Home = () => {
-  const containerStyle = {
-    backgroundImage: `url(${HomeDesert})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
-
-  const [text, setText] = useState('');
-  const [index, setIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isRotating, setIsRotating] = useState(false); // State to manage spinning animation
+  const isMobile = window.innerWidth <= 640; // Define mobile breakpoint, adjust as needed
 
   useEffect(() => {
-    const textToDisplay = "Turning Memories into Timeless Art!";
-    const timer = setInterval(() => {
-      if (index < textToDisplay.length) {
-        setText(textToDisplay.substring(0, index + 1));
-        setIndex((prevIndex) => prevIndex + 1);
-      } else {
-        clearInterval(timer);
-      }
-    }, 100); // Adjust the timing as needed
-    return () => {
-      clearInterval(timer);
-    };
-  }, [index]);
+    const images = isMobile ? imagesMobile : imagesDesktop;
+    const interval = setInterval(() => {
+      setIsRotating(true); // Activate spinning animation
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setIsRotating(false); // Deactivate spinning animation after image change
+      }, 500); // Adjust timing to match CSS transition duration
+    }, 3000); // Change image every 2 seconds
+
+    return () => clearInterval(interval);
+  }, [isMobile]);
+
+  const goToPreviousSlide = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + imagesMobile.length) % imagesMobile.length);
+  };
+
+  const goToNextSlide = () => {
+    setIsRotating(true); // Activate spinning animation
+    setTimeout(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagesMobile.length);
+      setIsRotating(false); // Deactivate spinning animation after image change
+    }, 1000); // Adjust timing to match CSS transition duration
+  };
+
+  const imageStyle = {
+    filter: isRotating ? 'blur(5px)' : 'none', // Apply blur filter conditionally
+  };
 
   return (
-    <div id='home'  className='w-full h-screen' style={containerStyle}>
-      <div className='mx-auto flex items-center justify-center w-full h-full '>
-        <h2 className='text-xl sm:text-xl md:text-2xl lg:text-5xl font-bold text-orange-300'>
-          {text}
-        </h2>
-      </div>
+    <div id='home' className=' overflow-hidden'>
+      <img
+        src={isMobile ? imagesMobile[currentImageIndex] : imagesDesktop[currentImageIndex]}
+        alt={`Slide ${currentImageIndex}`}
+        className={`w-full h-screen object-cover ${isRotating ? 'animate-pulse' : ''}`}
+        style={imageStyle} // Apply image style
+      />
+      <button
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 focus:outline-none"
+        onClick={goToPreviousSlide}
+      >
+        <HiChevronLeft className="h-6 w-6" />
+      </button>
+      <button
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 focus:outline-none"
+        onClick={goToNextSlide}
+      >
+        <HiChevronRight className="h-6 w-6" />
+      </button>
     </div>
   );
 };

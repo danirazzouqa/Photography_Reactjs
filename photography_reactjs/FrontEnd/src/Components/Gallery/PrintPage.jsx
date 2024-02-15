@@ -18,9 +18,9 @@ function PrintPage() {
   const role = user?.role;
 
   const sizes = [
-    { name: '8x10 inches', price: 20.0 },
-    { name: '12x18 inches', price: 30.0 },
-    { name: '16x20 inches', price: 40.0 },
+    { name: '8x10 inches'},
+    { name: '12x18 inches'},
+    { name: '16x20 inches'},
   ];
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function PrintPage() {
   }, [printName]);
 
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
-  const [totalPrice, setTotalPrice] = useState(selectedSize.price);
+  const [setTotalPrice] = useState(selectedSize.price);
 
   const handleSizeChange = (event) => {
     const selected = sizes.find((size) => size.name === event.target.value);
@@ -104,7 +104,7 @@ function PrintPage() {
   return (
     <div className="w-full h-full bg-slate-100">
       <NavLinksBar />
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 ">
+      <div className="container mx-auto text-center px-4 md:px-6 lg:px-8 py-8 ">
         <h2 className="w-full h-full text-4xl font-serif font-semibold my-8">Prints / {printName}</h2>
         <a className="text-blue-500 py-8 block" href="/Prints">
           Back to All Prints
@@ -115,34 +115,34 @@ function PrintPage() {
           </div>
         )}
         {role === 'admin' && (
-          <div className='container justify-center items-center text-center mt-12'>
+          <div className='container justify-center items-center text-center mx-auto mt-12 space-x-4 '>
             <h2>Create a Print</h2>
             <input
               type="text"
               placeholder="Name"
               value={name}
               onChange={handleNameChange}
-              className='w-[600px] mb-4'
+              className='w-[500px] mb-4 '
             />
             <input
               type="text"
               placeholder="Image File Name"
               value={imageFileName}
               onChange={handleImageFileNameChange}
-              className='w-[600px] mb-4'
+              className='w-[500px] mb-4'
             />
             <textarea
               placeholder="Description"
               value={description}
               onChange={handleDescriptionChange}
-              className='w-[600px] h-[200px] mb-4'
+              className='w-[500px] h-[200px] mb-4 mx-auto'
             />
             <input
               type="file"
               onChange={handleImageFileChange}
               className='mb-4'
             />
-            <button className='px-6' onClick={handlePrintUpload} disabled={isLoading}>
+            <button className='px-6 bg-gray-300 rounded-md' onClick={handlePrintUpload} disabled={isLoading}>
               {isLoading ? 'Uploading...' : 'Upload Print'}
             </button>
             {uploadStatus && <p className="mt-2 text-red-500">{uploadStatus}</p>}
@@ -161,27 +161,28 @@ function PrintPage() {
               </div>
             )}
             <div className="w-full md:w-1/2 p-4">
-              <h1 className="text-2xl font-bold text-center md:text-left p-4">{printName}</h1>
-              <p className="text-gray-500 text-center md:text-left mb-4">
+              <h1 className="text-2xl font-bold text-center  p-4">{printName}</h1>
+              <p className="text-gray-500 text-center  mb-4">
                 {selectedPrint?.description}
               </p>
 
               <div className="mb-4">
-                <label htmlFor="size" className="text-gray-600 font-bold">
+                <label htmlFor="size" className="text-gray-600 font-bold ">
                   Select Size:
                 </label>
                 <select
                   id="size"
                   value={selectedSize.name}
                   onChange={handleSizeChange}
-                  className="block w-full mt-2  rounded-md border-b-2 border-black "
+                  className="block text-center mb-6 mt-2 mx-auto  rounded-md border-b-2 border-black "
                 >
                   {sizes.map((size) => (
                     <option key={size.name} value={size.name}>
-                      {size.name} - ${size.price.toFixed(2)}
+                      {size.name}
                     </option>
                   ))}
                 </select>
+                <a href="/contact" className='mx-auto bg-gray-300 text-black shadow-black shadow-lg px-4 py-2 rounded-md'>Get Price</a>
               </div>
             </div>
           </div>

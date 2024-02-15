@@ -1,72 +1,70 @@
-import React from 'react';
-import {
-  FaFacebookSquare,
-  FaLinkedin,
-  FaInstagram,
-} from 'react-icons/fa';
-import Logo from '../Assets/Logo2.png';
+import React from "react";
+import { FaFacebookSquare, FaLinkedin, FaInstagram } from "react-icons/fa";
+import Logo from "../Assets/Logo2.png";
+import FooterPic from "../Assets/Footer.jpg";
 
 const Footer = () => {
   return (
-    <div className='bg-black  '>
-    <div className='max-w-[1240px] mx-auto py-12 px-4 grid lg:grid-cols-3  text-gray-300'>
-      <div>
-      <img src={Logo} alt="logo" style={{ width: '50px' }} />
+    <footer className='bg-black py-12'>
+      <div className='container mx-auto '>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 text-center '>
+          {/* Follow Me Section */}
+          <div className="lg:border-r lg-ml-8  border-white">
+            <h2 className='text-white text-lg font-semibold mb-4 '>Follow Me</h2>
+            
+            <img className=" mx-auto pb-4" src={Logo} alt='logo' style={{ width: "50px" }} />
+            <img
+              src={FooterPic}
+              alt='Profile'
+              className='w-[400px] lg:w-[500px] h-[300px] rounded-md mb-4 mx-auto object-fit'
+            />
+            {/* Add your social media links here */}
+            <div className=' flex items-center justify-center mt-6  gap-12 text-white'>
+              <a
+                href='https://www.linkedin.com/in/karamrazzoqa/'
+                target='_blank'
+                rel='noreferrer'
+              >
+                <FaLinkedin size={30} />
+              </a>
+              <a
+                href='https://www.facebook.com/karamFFS'
+                target='_blank'
+                rel='noreferrer'
+              >
+                <FaFacebookSquare size={30} />
+              </a>
+              <a
+                href='https://instagram.com/karam_razzouq?igshid=MzRlODBiNWFlZA=='
+                target='_blank'
+                rel='noreferrer'
+              >
+                <FaInstagram size={30} />
+              </a>
+            </div>
+          </div>
+
+          {/* Ready to Book Section */}
+          <div className="my-auto">
+            <h2 className='text-white text-lg font-semibold mb-4'>
+              Ready to Book?
+            </h2>
+            <p className='text-gray-300 mb-8 text-md text-center mx-2'>
+             I believe that every couple deserves my very best. Because of that,
+             I only take on a limited number of sessions per week.
+              Make sure to reach out to book your spot now!
+            </p>
+            <a href="/contact"  className='bg-gray-500 text-white px-6 py-4 rounded hover:bg-gray-600'>
+              Contact Me
+            </a>
+          </div>
+        </div>
         
-      <div className="flex items-center mt-6 ml-8 space-x-2">
-  <a href="https://www.linkedin.com/in/karamrazzoqa/" target="_blank" rel="noreferrer">
-    <FaLinkedin size={30} /> 
-  </a>
-  <div className="ml-2">/karamrazzoqa</div>
-</div>
-
-<div className="flex items-center ml-8 mt-2 space-x-2">
-  <a href="https://www.facebook.com/karamFFS" target="_blank" rel="noreferrer">
-    <FaFacebookSquare size={30} />
-  </a>
-  <div className="ml-2">/karamFFS</div>
-</div>
-
-<div className="flex items-center ml-8 mt-2 space-x-2">
-  <a href="https://instagram.com/karam_razzouq?igshid=MzRlODBiNWFlZA==" target="_blank" rel="noreferrer">
-    <FaInstagram size={30} />
-  </a>
-  <div className="ml-2">/karam_razzouq</div>
-</div>
       </div>
-      <div className='lg:col-span-2 flex space-x-4 mt-6'>
-    <div>
-    <h6 className=' ml-4 font-medium font-serif text-gray-400'>Shop</h6>
-        <ul>
-            <li className='py-2 text-sm'>Prints</li> 
-            <li className='py-2 text-sm'>Sessions</li>
-        </ul>
+      <div className="mx-auto text-center">
+      <p className=' mt-12 text-white '>&copy; 2023 Karam Photography. All rights reserved.</p>
     </div>
-   
-    <div>
-        <h6 className='ml-4 font-medium font-serif text-gray-400'>Company</h6>
-        <ul>
-            <li className='py-2 text-sm'>About</li>
-            <li className='py-2 text-sm'>Blog</li>
-            <li className='py-2 text-sm'>Jobs</li>
-            <li className='py-2 text-sm'>Careers</li>
-        </ul>
-    </div>
-    <div>
-        <h6 className='ml-4 font-medium font-serif text-gray-400'>Legal</h6>
-        <ul>
-            <li className='py-2 text-sm'>Privacy Policy</li>
-            <li className='py-2 text-sm'>Terms of Service</li>
-            <li className='py-2 text-sm'>Refund Policy</li>
-            <li className='py-2 text-sm'>Shipping Policy</li>
-        </ul>
-    </div>
-      </div>
-      <p className='m-auto mt-12'>&copy; 2023 Karam Photography. All rights reserved.</p>
-    </div>
-         
-    </div>
-   
+    </footer>
   );
 };
 

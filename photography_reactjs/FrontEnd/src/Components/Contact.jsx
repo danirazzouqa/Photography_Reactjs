@@ -17,7 +17,6 @@ const Contact = () => {
       <NavLinksBar />
       <div className="text-center py-8">
         <h1 className="text-3xl">Get in touch</h1>
-        <h2 className="text-xl">Contact Me</h2>
       </div>
       <div className="container mx-auto py-8 flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 p-4">

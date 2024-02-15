@@ -10,12 +10,11 @@ import ImgUploader from './Components/ImgUploader';
 import Blog from './Components/blog';
 import GalleryPage from './Components/Gallery/GalleryPage.jsx';
 import PrintPage from './Components/Gallery/PrintPage.jsx';
-import BlogUploader from './Components/BlogUploader';
 import Prints from './Components/Prints';
 import SignIn from './Components/SignIn.jsx';
 import Signup from './Components/Signup.jsx';
 import WelcomePage from './Components/WelcomePage.jsx';
-import PrintUploader from './Components/PrintUploader.jsx';
+
 
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
   const location = useLocation();
 
   // Define an array of paths where the footer should be hidden
-  const pathsToHideFooter = ['/ImgUploader', '/BlogUploader', '/PrintUploader'];
+  const pathsToHideFooter = ['/ImgUploader'];
 
   // Check if the current location is in the pathsToHideFooter array
   const showFooter = !pathsToHideFooter.includes(location.pathname);
@@ -42,8 +41,6 @@ function App() {
         <Route path="/prints" element={<Prints />} />
         <Route path="/ImgUploader" element={<ImgUploader />} />
         <Route path="/WelcomePage" element={<WelcomePage />} />
-        <Route path="/PrintUploader" element={<PrintUploader />} />
-        <Route path="/BlogUploader" element={<BlogUploader />} />
         <Route path="/gallery/:categoryName" element={<GalleryPage />} />
         <Route path="/prints/:printName" element={<PrintPage />} />
       </Routes>

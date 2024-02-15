@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from '../Assets/Profile.png';
+import Profile from '../Assets/About.jpg';
 import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import NavLinksBar from './NavLinksBar';
 
@@ -10,7 +10,7 @@ const About = () => {
       <div className="w-full h-full">
         <div className="w-full h-[100px]">
         </div>
-        <div className="h-full grid grid-cols-1 md:grid-cols-2 md:flex md:mt-32 ml-4 md:ml-10 lg:justify-center items-center bg-slate-100 mr-10">
+        <div className="h-full grid grid-cols-1 md:grid-cols-2 md:flex md:mt-32 ml-4 md:ml-10 lg:justify-center items-center text-center bg-slate-100 mr-10">
           <div className="text-3xl md:text-4xl p-4 md:p-8 w-[100%] md:w-[300px] text-center md:text-left lg:justify-center items-center lg:border-r-2 lg:border-block md:border-r-2 md:border-block  ">
             <img src={Profile} alt="" style={{ borderRadius: '50%' }} />
             <p className='justify-center text-center pt-4 font-serif text-xl text-gray-500'>Connect with me</p>
