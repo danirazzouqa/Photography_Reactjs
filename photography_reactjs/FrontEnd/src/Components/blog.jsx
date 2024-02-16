@@ -52,13 +52,12 @@ function Blog() {
         },
       });
       console.log('Blog post created:', response.data);
-      fetchPosts(); // Fetch the updated list of blog posts after submission
+      fetchPosts();
     } catch (error) {
       console.error('Error creating a blog post:', error);
     }
   };
 
-  // Define the BlogPostForm directly within the Blog component
   const BlogPostForm = () => {
     const [file, setFile] = useState(null);
     const [story, setStory] = useState('');
@@ -88,65 +87,63 @@ function Blog() {
       formData.append('title', title);
 
       try {
-        await handleBlogPostSubmit(formData); // Call the handleBlogPostSubmit function defined in the Blog component
+        await handleBlogPostSubmit(formData);
       } catch (error) {
         console.error('Error creating a blog post:', error);
       }
     };
 
     return (
-      <div className='container justify-center items-center text-center mt-12'>
-        <h2>Create a Blog Post</h2>
-        <input className='mb-12 justify-between items-center text-center' type="file" onChange={handleFileChange} />
+      <div className='w-full mt-12 mx-auto max-w-4xl lg:max-w-6xl px-4'>
+        <h2 className='font-serif font-semibold mb-4 text-center'>Create a Blog Post</h2>
+        <input className='block mx-auto mb-12 text-center' type="file" onChange={handleFileChange} />
         <input
           type="text"
           placeholder="Title"
           value={title}
           onChange={handleTitleChange}
-          className='w-[600px] mb-4'
+          className='block w-full mb-4'
         />
         <textarea
           placeholder="Write your story here..."
           value={story}
           onChange={handleStoryChange}
-          className='w-[600px] h-[200px]'
+          className='block w-full h-[200px] mb-4 resize-none'
         ></textarea>
-        <button className='px-6' onClick={handleFormSubmit}>Submit</button>
+        <button className='block mx-auto px-6' onClick={handleFormSubmit}>Submit</button>
       </div>
     );
   };
 
   return (
-    <div className='w-full h-full bg-slate-100'>
+    <div className='w-full bg-slate-100 text-center overflow-x-hidden'>
       <NavLinksBar />
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 ">
-        <h2 className="w-full h-full text-4xl font-serif font-semibold my-8">Blogs</h2>
-        {role === 'admin' && <BlogPostForm />} {/* Render BlogPostForm for admin users */}
-        <div className="">
+      <div className="mx-auto max-w-4xl lg:max-w-6xl px-4 py-8">
+        <h2 className="text-4xl font-serif font-semibold my-8">Blogs</h2>
+        {role === 'admin' && <BlogPostForm />}
+        <div>
           {blogPosts.map((post, index) => (
-            <div key={post._id} className={`flex flex-col md:flex-row border-b-2 border-gray-200 p-6  mb-8 text-center   ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
+            <div key={post._id} className={`flex flex-col md:flex-row border-b-2 border-gray-200 p-6 mb-8 text-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
               <div
                 className={`h-[400px] md:w-1/2 my-8 md:mt-0`}
                 onClick={() => openImageModal(post.image)}
               >
-                <img className='w-full h-full rounded-lg shadow-xl cursor-pointer object-cover 
-                ' src={`http://localhost:4000/uploads/${post.image}`} 
-                alt="Blog Post" />
+                <img className='w-full h-full rounded-lg shadow-xl cursor-pointer object-cover mb-2' src={`http://localhost:4000/uploads/${post.image}`} alt="Blog Post" />
                 {role === 'admin' && (
-                 <button
-                 className="text-red-600 p-2 hover:text-red-800"
-                 onClick={(event) => {
-                   event.stopPropagation(); // Prevent click event propagation
-                   handleDeletePost(post._id);
-                 }}
-               >
-                 Delete
-               </button>
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 mb-2 rounded-md"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleDeletePost(post._id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 )}
               </div>
-              <div className='w-full h-full md:w-1/2 px-4 '>
-                <h2 className='font-bold text-2xl font-serif py-4 text-center '>{post.title}</h2>
-                <p className='font-sans text-gray-500 text-center '>{post.story}</p>
+              <div className='w-full h-full md:w-1/2 px-4'>
+                <h2 className='font-bold text-2xl font-serif py-4 text-center'>{post.title}</h2>
+                <p className='font-sans text-gray-500 text-center'>{post.story}</p>
               </div>
             </div>
           ))}

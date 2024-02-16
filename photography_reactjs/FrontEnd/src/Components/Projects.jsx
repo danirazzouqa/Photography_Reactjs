@@ -1,5 +1,3 @@
-// Projects.js
-
 import React from 'react';
 import Project1 from '../Assets/Project1.jpg';
 import Project2 from '../Assets/Project2.jpg';
@@ -8,15 +6,15 @@ import NavLinksBar from './NavLinksBar';
 
 function Projects() {
   return (
-    <div id="projects" className="w-full h-full bg-slate-100">
+    <div id="projects" className=" w-full h-full bg-slate-100 ">
       <NavLinksBar />
-      <div className="container mx-auto h-full ">
+      <div className="container mx-auto h-full  ">
         <div className="w-full h-[100px]"></div>
         {/* First project */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-10 ml-4 md:ml-10 text-center items-center bg-slate-100 mr-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-10 ml-4 md:ml-10 text-center items-center bg-slate-100 mr-10 ">
           <div>
             <img
-              className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px] rounded-md object-cover shadow-lg shadow-black hover:scale-105 duration-500 filter brightness-90 mx-auto"
+              className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px]  rounded-md object-cover shadow-lg shadow-black hover:scale-105 duration-500  mx-auto " 
               src={Project1}
               alt=""
             />
@@ -45,7 +43,7 @@ function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-10 ml-4 md:ml-10 text-center items-center bg-slate-100 mr-10">
           <div className=" ml-8 p-4 md:p-8 md:order-2">
             <img
-              className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px] rounded-md   object-cover shadow-lg shadow-black hover:scale-105 duration-500 filter brightness-90"
+              className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px] rounded-md   object-cover shadow-lg shadow-black hover:scale-105 duration-500  "
               src={Project2}
               alt=""
             />

@@ -103,18 +103,18 @@ function GalleryPage() {
             {uploadStatus && <p>{uploadStatus}</p>}
           </div>
         )}
-        <div className="grid gap-y-10 md:grid-cols-2 lg:grid-cols-3 gap-5 text-center mb-8">
+        <div className="grid gap-y-16 md:grid-cols-2 lg:grid-cols-3 gap-5 text-center mb-8">
           {images.map((image, index) => (
             <div key={index} className="">
               <img
                 src={`http://localhost:4000/uploads/${image.originalFileName}`}
                 alt={image.originalFileName}
-                className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer"
+                className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer mb-2"
                 onClick={() => openImageModal(image)}
               />
               {role === 'admin' && (
                 <button
-                  className="text-red-600 p-2 hover:text-red-800"
+                  className="bg-red-500 text-white px-4 py-2  rounded-md"
                   onClick={() => handleDeleteImage(image._id)} // Use _id for image id
                 >
                   Delete

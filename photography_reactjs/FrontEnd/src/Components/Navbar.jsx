@@ -38,7 +38,7 @@ const DesktopNav = () => (
 );
 
 const MobileNav = ({ nav }) => (
-  <ul className={`absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center text-gray-300 ${nav ? '' : 'hidden'}`}>
+  <ul className={`absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center text-gray-300 z-19 ${nav ? '' : 'hidden'}`}>
     <li>Home</li>
     <li>Skills</li>
     <li>Projects</li>
@@ -51,7 +51,7 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav);
 
   return (
-    <div className='fixed w-full h-[40px] flex items-center justify-between'>
+    <div className='fixed w-full h-[40px] flex items-center justify-between z-19'>
       <div>
         <img className='cursor-pointer' src={Logo} alt="logo" style={{ width: '50px' }} />
       </div>
