@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
-import NavLinksBar from './NavLinksBar';
 import { Link } from 'react-router-dom';
+import NavLinksBar from './NavLinksBar';
+import { AuthContext } from '../context/AuthContext';
 
 function Prints() {
   const [prints, setPrints] = useState([]);
@@ -11,9 +12,10 @@ function Prints() {
   const [imageFile, setImageFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useContext(AuthContext);
+  const role = user?.role;
 
-  useEffect(() => {
-    // Fetch category data from the backend
+  const fetchPrints = useCallback(() => {
     axios
       .get('https://photography-reactjs.onrender.com/prints')
       .then((response) => {
@@ -23,6 +25,10 @@ function Prints() {
         console.error('Error fetching prints:', error);
       });
   }, []);
+
+  useEffect(() => {
+    fetchPrints();
+  }, [fetchPrints]);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -42,7 +48,7 @@ function Prints() {
   };
 
   const handlePrintUpload = () => {
-    if (name && imageFileName && description && imageFile) {
+    if (role === 'admin' && name && imageFileName && description && imageFile) {
       setIsLoading(true);
       const formData = new FormData();
       formData.append('name', name);
@@ -65,19 +71,21 @@ function Prints() {
           setIsLoading(false);
         });
     } else {
-      setUploadStatus('Please fill in all required fields and select an image file.');
+      setUploadStatus('You do not have permission to upload prints or missing fields.');
     }
   };
 
   const handleDeletePrint = (printId) => {
-    axios
-      .delete(`https://photography-reactjs.onrender.com/prints/${printId}`)
-      .then(() => {
-        setPrints(prevPrints => prevPrints.filter(print => print._id !== printId));
-      })
-      .catch((error) => {
-        console.error('Error deleting print:', error);
-      });
+    if (role === 'admin') {
+      axios
+        .delete(`https://photography-reactjs.onrender.com/prints/${printId}`)
+        .then(() => {
+          setPrints(prevPrints => prevPrints.filter(print => print._id !== printId));
+        })
+        .catch((error) => {
+          console.error('Error deleting print:', error);
+        });
+    }
   };
 
   return (
@@ -88,38 +96,41 @@ function Prints() {
           Prints
         </h2>
 
-        <div className='container justify-center items-center text-center mx-auto mt-12 space-x-4 '>
-          <h2 className='mb-4 font-semibold'>Create a Print</h2>
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={handleNameChange}
-            className='w-[500px] mb-4 '
-          />
-          <input
-            type="text"
-            placeholder="Image File Name"
-            value={imageFileName}
-            onChange={handleImageFileNameChange}
-            className='w-[500px] mb-4'
-          />
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={handleDescriptionChange}
-            className='w-[500px] h-[200px] mb-4 mx-auto'
-          />
-          <input
-            type="file"
-            onChange={handleImageFileChange}
-            className='mb-4'
-          />
-          <button className='px-6 bg-gray-300 rounded-md mb-4' onClick={handlePrintUpload} disabled={isLoading}>
-            {isLoading ? 'Uploading...' : 'Upload Print'}
-          </button>
-          {uploadStatus && <p className="mt-2 text-red-500">{uploadStatus}</p>}
-        </div>
+        {/* Render upload form only for admin */}
+        {role === 'admin' && (
+          <div className='container justify-center items-center text-center mx-auto mt-12 space-x-4 '>
+            <h2 className='mb-4 font-semibold'>Create a Print</h2>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={handleNameChange}
+              className='w-[500px] mb-4 '
+            />
+            <input
+              type="text"
+              placeholder="Image File Name"
+              value={imageFileName}
+              onChange={handleImageFileNameChange}
+              className='w-[500px] mb-4'
+            />
+            <textarea
+              placeholder="Description"
+              value={description}
+              onChange={handleDescriptionChange}
+              className='w-[500px] h-[200px] mb-4 mx-auto'
+            />
+            <input
+              type="file"
+              onChange={handleImageFileChange}
+              className='mb-4'
+            />
+            <button className='px-6 bg-gray-300 rounded-md mb-4' onClick={handlePrintUpload} disabled={isLoading}>
+              {isLoading ? 'Uploading...' : 'Upload Print'}
+            </button>
+            {uploadStatus && <p className="mt-2 text-red-500">{uploadStatus}</p>}
+          </div>
+        )}
 
         <div className="w-full grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 lg:gap-y-20 gap-y-10 md:gap-y-8">
           {prints.map((print) => (
@@ -136,7 +147,10 @@ function Prints() {
                   {print.name}
                 </h3>
               </Link>
-              <button onClick={() => handleDeletePrint(print._id)} className="bg-red-500 text-white px-4 py-2 rounded-md">Delete Print</button>
+              {/* Render delete button only for admin */}
+              {role === 'admin' && (
+                <button onClick={() => handleDeletePrint(print._id)} className="bg-red-500 text-white px-4 py-2 rounded-md">Delete Print</button>
+              )}
             </div>
           ))}
         </div>
