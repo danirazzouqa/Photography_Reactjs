@@ -107,7 +107,7 @@ function GalleryPage() {
           {images.map((image, index) => (
             <div key={index} className="">
               <img
-                src={`https://photography-reactjs.onrender.com/${image.originalFileName}`}
+                src={`https://photography-reactjs.onrender.com/uploads/${image.originalFileName}`}
                 alt={image.originalFileName}
                 className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer mb-2"
                 onClick={() => openImageModal(image)}
