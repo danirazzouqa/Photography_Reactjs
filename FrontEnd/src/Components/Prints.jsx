@@ -15,7 +15,7 @@ function Prints() {
   useEffect(() => {
     // Fetch category data from the backend
     axios
-      .get('http://localhost:4000/prints')
+      .get('https://photography-reactjs.onrender.com/prints')
       .then((response) => {
         setPrints(response.data);
       })
@@ -50,7 +50,7 @@ function Prints() {
       formData.append('description', description);
       formData.append('imageFile', imageFile);
 
-      axios.post('http://localhost:4000/prints', formData)
+      axios.post('https://photography-reactjs.onrender.com/prints', formData)
         .then(response => {
           setUploadStatus('Print details uploaded successfully!');
           setName('');
@@ -71,7 +71,7 @@ function Prints() {
 
   const handleDeletePrint = (printId) => {
     axios
-      .delete(`http://localhost:4000/prints/${printId}`)
+      .delete(`https://photography-reactjs.onrender.com/prints/${printId}`)
       .then(() => {
         setPrints(prevPrints => prevPrints.filter(print => print._id !== printId));
       })
@@ -127,7 +127,7 @@ function Prints() {
               <Link to={`/Prints/${print.name}`}>
                 <div className="group flex flex-col">
                   <img
-                    src={`http://localhost:4000/uploads/${print.imageFileName}`}
+                    src={`https://photography-reactjs.onrender.com/uploads/${print.imageFileName}`}
                     alt={print.name}
                     className="w-[350px] h-[450px] rounded-lg object-cover shadow-2xl"
                   />

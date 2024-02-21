@@ -17,7 +17,7 @@ function GalleryPage() {
 
   const fetchImages = useCallback(() => {
     axios
-      .get(`http://localhost:4000/images?categoryName=${categoryName}`)
+      .get(`https://photography-reactjs.onrender.com/images?categoryName=${categoryName}`)
       .then((response) => {
         setImages(response.data);
       })
@@ -55,7 +55,7 @@ function GalleryPage() {
       formData.append('categoryName', categoryName);
 
       axios
-        .post('http://localhost:4000/upload', formData)
+        .post('https://photography-reactjs.onrender.com/upload', formData)
         .then((response) => {
           setUploadStatus('Images uploaded successfully!');
           fetchImages();
@@ -74,7 +74,7 @@ function GalleryPage() {
   const handleDeleteImage = (id) => {
     if (role === 'admin') {
       axios
-        .delete(`http://localhost:4000/images/${id}`)
+        .delete(`https://photography-reactjs.onrender.com/images/${id}`)
         .then((response) => {
           fetchImages();
         })
@@ -107,7 +107,7 @@ function GalleryPage() {
           {images.map((image, index) => (
             <div key={index} className="">
               <img
-                src={`http://localhost:4000/uploads/${image.originalFileName}`}
+                src={`https://photography-reactjs.onrender.com/${image.originalFileName}`}
                 alt={image.originalFileName}
                 className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer mb-2"
                 onClick={() => openImageModal(image)}
@@ -127,7 +127,7 @@ function GalleryPage() {
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70 z-50">
             <div className="max-w-7xl max-h-2xl h-screen p-4 bg-transparent">
               <img
-                src={`http://localhost:4000/uploads/${selectedImage.originalFileName}`}
+                src={`https://photography-reactjs.onrender.com/uploads/${selectedImage.originalFileName}`}
                 alt={selectedImage.originalFileName}
                 className="w-full h-full object-contain rounded-sm"
               />
