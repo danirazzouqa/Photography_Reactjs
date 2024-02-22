@@ -122,20 +122,20 @@ function PrintPage() {
               placeholder="Name"
               value={name}
               onChange={handleNameChange}
-              className='w-[500px] mb-4 '
+              className='w-full md:w-[500px] mb-4 '
             />
             <input
               type="text"
               placeholder="Image File Name"
               value={imageFileName}
               onChange={handleImageFileNameChange}
-              className='w-[500px] mb-4'
+              className='w-full md:w-[500px] mb-4'
             />
             <textarea
               placeholder="Description"
               value={description}
               onChange={handleDescriptionChange}
-              className='w-[500px] h-[200px] mb-4 mx-auto'
+              className='w-full md:w-[500px] h-[200px] mb-4 mx-auto'
             />
             <input
               type="file"
@@ -149,14 +149,14 @@ function PrintPage() {
           </div>
         )}
 
-        <div className="flex justify-center items-center mt-10 h-screen">
+        <div className="flex justify-center items-center mt-10">
           <div className="max-w-4xl  p-12 rounded-lg w-full flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-14">
             {selectedPrint && (
               <div className="w-full md:w-1/2">
                 <img
                   src={`https://photography-reactjs.onrender.com/uploads/${selectedPrint.imageFileName}`}
                   alt=""
-                  className="rounded-lg object-cover w-full h-[500px]"
+                  className="rounded-lg object-cover w-full h-auto md:h-[500px]"
                 />
               </div>
             )}
