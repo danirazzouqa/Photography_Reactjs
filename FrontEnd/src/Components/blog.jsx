@@ -118,8 +118,8 @@ function Blog() {
   return (
     <div className='w-full bg-slate-100 text-center overflow-x-hidden'>
       <NavLinksBar />
-      <div className="mx-auto max-w-4xl lg:max-w-6xl px-4 py-8">
-        <h2 className="text-4xl font-serif font-semibold my-8">Blogs</h2>
+      <div className=" mx-auto max-w-4xl lg:max-w-6xl px-4 py-8">
+        <h2 className="text-4xl font-serif font-semibold my-8 lg:text-left">Blogs</h2>
         {role === 'admin' && <BlogPostForm />}
         <div>
           {blogPosts.map((post, index) => (

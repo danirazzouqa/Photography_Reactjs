@@ -22,7 +22,7 @@ function Gallery() {
     <div className='w-full h-full bg-slate-100 '>
      <NavLinksBar />
 
-    <div className="container w-full h-full mx-auto p-4 md:p-6 lg:p-8 ">
+    <div className="container  h-full mx-auto p-4 md:p-6 lg:p-8 ">
      
      <h2 className="w-full h-full text-3xl font-bold my-8 ml-4   ">
         Gallary
