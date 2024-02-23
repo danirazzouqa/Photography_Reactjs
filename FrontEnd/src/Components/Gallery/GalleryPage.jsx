@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import NavLinksBar from '../NavLinksBar';
 import { AuthContext } from '../../context/AuthContext';
+import { v4 as uuidv4 } from 'uuid'; // Import UUID generator
 
 function GalleryPage() {
   const { categoryName } = useParams();
@@ -50,7 +51,8 @@ function GalleryPage() {
       const formData = new FormData();
 
       files.forEach((file) => {
-        formData.append('files', file);
+        const uniqueFileName = `${uuidv4()}-${file.name}`; // Generate unique name using UUID
+        formData.append('files', file, uniqueFileName); // Append file with unique name
       });
       formData.append('categoryName', categoryName);
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Project1 from '../Assets/Project1.jpg';
-import Project2 from '../Assets/Project2.jpg';
+import Project1 from '../Assets/Project1.png';
+import Project2 from '../Assets/Project2.png';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import NavLinksBar from './NavLinksBar';
 
