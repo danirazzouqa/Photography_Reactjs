@@ -17,7 +17,7 @@ function Prints() {
 
   const fetchPrints = useCallback(() => {
     axios
-      .get('https://photography-reactjs.onrender.com/prints')
+      .get('http://localhost:4000/prints')
       .then((response) => {
         setPrints(response.data);
       })
@@ -56,14 +56,14 @@ function Prints() {
       formData.append('description', description);
       formData.append('imageFile', imageFile);
 
-      axios.post('https://photography-reactjs.onrender.com/prints', formData)
+      axios.post('http://localhost:4000/prints', formData)
         .then(response => {
           setUploadStatus('Print details uploaded successfully!');
           setName('');
           setImageFileName('');
           setDescription('');
           setImageFile(null);
-          setPrints(prevPrints => [...prevPrints, response.data]); // Update prints state with the newly uploaded print
+          setPrints(prevPrints => [...prevPrints, response.data]);
           setIsLoading(false);
         })
         .catch(error => {
@@ -78,7 +78,7 @@ function Prints() {
   const handleDeletePrint = (printId) => {
     if (role === 'admin') {
       axios
-        .delete(`https://photography-reactjs.onrender.com/prints/${printId}`)
+        .delete(`http://localhost:4000/prints/${printId}`)
         .then(() => {
           setPrints(prevPrints => prevPrints.filter(print => print._id !== printId));
         })
@@ -96,11 +96,12 @@ function Prints() {
           Prints
         </h2>
 
-        {/* Render upload form only for admin */}
+        
         {role === 'admin' && (
           <div className='container justify-center items-center text-center mx-auto mt-12 space-x-4 '>
             <h2 className='mb-4 font-semibold'>Create a Print</h2>
             <input
+            name='name'
               type="text"
               placeholder="Name"
               value={name}
@@ -108,6 +109,7 @@ function Prints() {
               className='w-[500px] mb-4 '
             />
             <input
+            name='imageFileName'
               type="text"
               placeholder="Image File Name"
               value={imageFileName}
@@ -115,6 +117,7 @@ function Prints() {
               className='w-[500px] mb-4'
             />
             <textarea
+            name='description'
               placeholder="Description"
               value={description}
               onChange={handleDescriptionChange}
@@ -136,9 +139,9 @@ function Prints() {
           {prints.map((print) => (
             <div key={print._id} className="rounded-lg text-center mx-auto">
               <Link to={`/Prints/${print.name}`}>
-                <div className="group flex flex-col">
+                <div data-testid="print-item" className="group flex flex-col">
                   <img
-                    src={`https://photography-reactjs.onrender.com/uploads/${print.imageFileName}`}
+                    src={`http://localhost:4000/uploads/${print.imageFileName}`}
                     alt={print.name}
                     className="w-[350px] h-[450px] rounded-lg object-cover shadow-2xl"
                   />
@@ -147,7 +150,7 @@ function Prints() {
                   {print.name}
                 </h3>
               </Link>
-              {/* Render delete button only for admin */}
+              
               {role === 'admin' && (
                 <button onClick={() => handleDeletePrint(print._id)} className="bg-red-500 text-white px-4 py-2 rounded-md">Delete Print</button>
               )}

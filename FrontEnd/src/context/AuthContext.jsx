@@ -24,12 +24,12 @@ export const AuthContextProvider = ({ children }) => {
         if (storedUser) {
             dispatch({ type: 'LOGIN', payload: JSON.parse(storedUser) });
         }
-    }, []); // Only run once when component mounts
+    }, []); 
 
     useEffect(() => {
         // Update local storage when user state changes
         localStorage.setItem('user', JSON.stringify(state.user));
-    }, [state.user]); // Update only when user state changes
+    }, [state.user]); 
 
     console.log('AuthContext state:', state);
 

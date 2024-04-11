@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const PostCategories = async (req, res) => {
   try {
     const { name } = req.body;
-    const imageFileName = req.file ? req.file.filename : ''; // Get the uploaded image file name
+    const imageFileName = req.file ? req.file.filename : ''; 
 
     const category = new Category({ name, imageFileName });
     await category.save();
@@ -36,7 +36,6 @@ const PostCategories = async (req, res) => {
   }
   
   // Route to get a single category by its ID
-  // Route to get a single category by its ID
 const getCategory = async (req, res) => {
     try {
       const { categoryId } = req.params;
@@ -47,7 +46,7 @@ const getCategory = async (req, res) => {
       if (!category) {
         return res.status(404).json({ error: 'No such category' });
       }
-      res.status(200).json(category); // Corrected the response to send the 'category' object
+      res.status(200).json(category);t
     } catch (error) {
       res.status(500).json({ error: 'An error occurred while fetching the category' });
     }

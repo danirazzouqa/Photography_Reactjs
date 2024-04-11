@@ -13,7 +13,7 @@ const BlogPost = async (req, res) => {
     const blogPost = new BlogPostModel({
       story: story,
       image: req.file.filename,
-      title : title // Assuming you're saving the uploaded file name
+      title : title 
     });
 
     const savedBlogPost = await blogPost.save();

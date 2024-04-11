@@ -16,18 +16,18 @@ const imagesDesktop = [Home1, Home2, Home3, Home4];
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isRotating, setIsRotating] = useState(false); // State to manage spinning animation
-  const isMobile = window.innerWidth <= 640; // Define mobile breakpoint, adjust as needed
+  const [isRotating, setIsRotating] = useState(false); 
+  const isMobile = window.innerWidth <= 640; 
 
   useEffect(() => {
     const images = isMobile ? imagesMobile : imagesDesktop;
     const interval = setInterval(() => {
-      setIsRotating(true); // Activate spinning animation
+      setIsRotating(true); 
       setTimeout(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setIsRotating(false); // Deactivate spinning animation after image change
-      }, 500); // Adjust timing to match CSS transition duration
-    }, 3000); // Change image every 2 seconds
+        setIsRotating(false); 
+      }, 500); 
+    }, 3000); 
 
     return () => clearInterval(interval);
   }, [isMobile]);
@@ -37,15 +37,15 @@ const Home = () => {
   };
 
   const goToNextSlide = () => {
-    setIsRotating(true); // Activate spinning animation
+    setIsRotating(true); 
     setTimeout(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagesMobile.length);
-      setIsRotating(false); // Deactivate spinning animation after image change
-    }, 1000); // Adjust timing to match CSS transition duration
+      setIsRotating(false); 
+    }, 1000); 
   };
 
   const imageStyle = {
-    filter: isRotating ? 'blur(5px)' : 'none', // Apply blur filter conditionally
+    filter: isRotating ? 'blur(5px)' : 'none',
   };
 
   return (
@@ -54,7 +54,7 @@ const Home = () => {
         src={isMobile ? imagesMobile[currentImageIndex] : imagesDesktop[currentImageIndex]}
         alt={`Slide ${currentImageIndex}`}
         className={`w-full h-screen object-cover ${isRotating ? 'animate-pulse' : ''}`}
-        style={imageStyle} // Apply image style
+        style={imageStyle} 
       />
       <button
         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 focus:outline-none"

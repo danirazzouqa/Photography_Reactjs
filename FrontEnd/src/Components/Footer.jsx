@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className='bg-black py-12'>
       <div className='container mx-auto '>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 text-center '>
-          {/* Follow Me Section */}
+         
           <div className="lg:border-r lg-ml-8  border-white">
             <h2 className='text-white text-lg font-semibold mb-4 '>Follow Me</h2>
             
@@ -18,7 +18,7 @@ const Footer = () => {
               alt='Profile'
               className='w-[400px] lg:w-[500px] h-[300px] rounded-md mb-4 mx-auto object-fit'
             />
-            {/* Add your social media links here */}
+           
             <div className=' flex items-center justify-center mt-6  gap-12 text-white'>
               <a
                 href='https://www.linkedin.com/in/karamrazzoqa/'
@@ -44,7 +44,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Ready to Book Section */}
+          
           <div className="my-auto">
             <h2 className='text-white text-lg font-semibold mb-4'>
               Ready to Book?

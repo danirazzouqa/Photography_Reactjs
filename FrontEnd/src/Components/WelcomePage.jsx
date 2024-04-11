@@ -9,12 +9,12 @@ const WelcomePage = () => {
   const { user } = useAuthContext();
   
   useEffect(() => {
-    console.log(location.state); // This will log the state passed to the WelcomePage
+    console.log(location.state); 
 
-    // Rest of your existing useEffect code
+    
     const timer = setTimeout(() => {
-      navigate('/gallery'); // Redirect to the gallery page
-    }, 4000); // 3 seconds delay
+      navigate('/gallery'); 
+    }, 4000); 
 
     return () => clearTimeout(timer);
   }, [navigate, location.state]);

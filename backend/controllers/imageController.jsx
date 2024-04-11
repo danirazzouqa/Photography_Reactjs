@@ -36,7 +36,6 @@ const getImage = async (req, res) => {
     res.status(200).json({ ...image.toObject(), imageUrl });
   };
 
-//post an image
 // Upload an image
 const uploadImage = async (req, res) => {
   try {
@@ -95,28 +94,6 @@ const deleteImage = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while deleting the image' });
   }
 };
-
-
-
-//update image
-const updateimage = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'no such image'})
-    }
-
-    const image = await Image.findOneAndUpdate({_id: id} ,{
-        ...req.body
-    })
-
-    if (!image) {
-        return res.status(404).json({error: 'no such image'})
-    }
-        res.status(200).json(image)
-
-}
-
 
 module.exports = {
     uploadImage, getImages, getImage ,deleteImage , updateimage

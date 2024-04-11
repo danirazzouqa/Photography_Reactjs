@@ -11,7 +11,7 @@ export const useLogin = () => {
     setError(null);
 
     try {
-      const response = await fetch('https://photography-reactjs.onrender.com/users/login', {
+      const response = await fetch('http://localhost:4000/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password ,role}),
@@ -19,7 +19,7 @@ export const useLogin = () => {
       
       if (!response.ok) {
         const json = await response.json();
-        throw new Error(json.error); // Throw error with the message from the backend
+        throw new Error(json.error); 
       }
 
       const json = await response.json();
@@ -30,9 +30,9 @@ export const useLogin = () => {
 
       setIsLoading(false);
     } catch (error) {
-      setError(error.message); // Set error message
+      setError(error.message); 
       setIsLoading(false);
-      throw error; // Re-throw error to be caught by the component
+      throw error; 
     }
   };
 

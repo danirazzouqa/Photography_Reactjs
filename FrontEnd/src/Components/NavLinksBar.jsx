@@ -24,7 +24,7 @@ const DesktopNav = ({ isLandingPage }) => {
       {isLandingPage ? (
         <>
           <li><a href="#home" onClick={(e) => handleNavLinkClick(e, 'home')}>Home</a></li>
-          <li><a href="#about" onClick={(e) => handleNavLinkClick(e, 'about')}>About</a></li>
+          <li><a href="about" onClick={(e) => handleNavLinkClick(e, 'about')}>About</a></li>
           <li><a href="#projects" onClick={(e) => handleNavLinkClick(e, 'projects')}>Projects</a></li>
           <li><a href="/blog">Blogs</a></li>
           <li><a href="/gallery">Gallery</a></li>

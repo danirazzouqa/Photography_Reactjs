@@ -25,7 +25,7 @@ router.get('/',  async (req, res) => {
       const { categoryName } = req.query;
       console.log('Category Name:', categoryName);
   
-      // ... rest of the code
+   
     } catch (error) {
       console.error('Error fetching images:', error);
       res.status(500).json({ error: 'An error occurred while fetching images' });

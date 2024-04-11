@@ -15,7 +15,7 @@ function Blog() {
   }, []);
 
   const fetchPosts = () => {
-    axios.get('https://photography-reactjs.onrender.com/blogs')
+    axios.get('http://localhost:4000/blogs')
       .then((response) => {
         setBlogPosts(response.data);
       })
@@ -34,7 +34,7 @@ function Blog() {
 
   const handleDeletePost = (id) => {
     if (role === 'admin') {
-      axios.delete(`https://photography-reactjs.onrender.com/blogs/${id}`)
+      axios.delete(`http://localhost:4000/blogs/${id}`)
         .then((response) => {
           fetchPosts();
         })
@@ -46,7 +46,7 @@ function Blog() {
 
   const handleBlogPostSubmit = async (formData) => {
     try {
-      const response = await axios.post('https://photography-reactjs.onrender.com/blogs', formData, {
+      const response = await axios.post('http://localhost:4000/blogs', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -94,17 +94,17 @@ function Blog() {
     };
 
     return (
-      <div className='w-full mt-12 mx-auto max-w-4xl lg:max-w-6xl px-4'>
+      <div  className='w-full mt-12 mx-auto max-w-4xl lg:max-w-6xl px-4'>
         <h2 className='font-serif font-semibold mb-4 text-center'>Create a Blog Post</h2>
         <input className='block mx-auto mb-12 text-center' type="file" onChange={handleFileChange} />
-        <input
+        <input name='title'
           type="text"
           placeholder="Title"
           value={title}
           onChange={handleTitleChange}
           className='block w-full mb-4'
         />
-        <textarea
+        <textarea name='story'
           placeholder="Write your story here..."
           value={story}
           onChange={handleStoryChange}
@@ -128,7 +128,7 @@ function Blog() {
                 className={`h-[400px] md:w-1/2 my-8 md:mt-0`}
                 onClick={() => openImageModal(post.image)}
               >
-                <img className='w-full h-full rounded-lg shadow-xl cursor-pointer object-cover mb-2' src={`https://photography-reactjs.onrender.com/uploads/${post.image}`} alt="Blog Post" />
+                <img className='w-full h-full rounded-lg shadow-xl cursor-pointer object-cover mb-2' src={`http://localhost:4000/uploads/${post.image}`} alt="Blog Post" />
                 {role === 'admin' && (
                   <button
                     className="bg-red-500 text-white px-4 py-2 mb-2 rounded-md"
@@ -153,7 +153,7 @@ function Blog() {
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70 z-50">
           <div className="max-w-7xl max-h-2xl h-screen p-4 bg-transparent">
             <img
-              src={`https://photography-reactjs.onrender.com/uploads/${selectedImage}`}
+              src={`http://localhost:4000/uploads/${selectedImage}`}
               alt={selectedImage}
               className="w-full h-full object-contain rounded-lg"
             />

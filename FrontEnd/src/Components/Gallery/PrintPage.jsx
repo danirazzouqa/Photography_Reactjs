@@ -8,12 +8,6 @@ function PrintPage() {
   const { printName } = useParams();
   console.log('Current printName:', printName);
   const [selectedPrint, setSelectedPrint] = useState();
-  const [uploadStatus, setUploadStatus] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState('');
-  const [imageFileName, setImageFileName] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageFile, setImageFile] = useState(null);
   const { user } = useContext(AuthContext);
   const role = user?.role;
 
@@ -25,7 +19,7 @@ function PrintPage() {
 
   useEffect(() => {
     axios
-      .get(`https://photography-reactjs.onrender.com/prints?printName=${printName}`)
+      .get(`http://localhost:4000/prints?printName=${printName}`)
       .then((response) => {
         setSelectedPrint(response.data);
       })
@@ -34,64 +28,10 @@ function PrintPage() {
       });
   }, [printName]);
 
-  const [selectedSize, setSelectedSize] = useState(sizes[0]);
-  const [setTotalPrice] = useState(selectedSize.price);
-
-  const handleSizeChange = (event) => {
-    const selected = sizes.find((size) => size.name === event.target.value);
-    setSelectedSize(selected);
-    setTotalPrice(selected.price);
-  };
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleImageFileNameChange = (e) => {
-    setImageFileName(e.target.value);
-  };
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handleImageFileChange = (e) => {
-    const file = e.target.files[0];
-    setImageFile(file);
-  };
-
-  const handlePrintUpload = () => {
-    if (name && imageFileName && description && imageFile) {
-      setIsLoading(true);
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('imageFileName', imageFileName);
-      formData.append('description', description);
-      formData.append('imageFile', imageFile);
-
-      axios.post('https://photography-reactjs.onrender.com/prints', formData)
-        .then(response => {
-          setUploadStatus('Print details uploaded successfully!');
-          setName('');
-          setImageFileName('');
-          setDescription('');
-          setImageFile(null);
-          setSelectedPrint(response.data); // Update selectedPrint state with the newly uploaded print
-          setIsLoading(false);
-        })
-        .catch(error => {
-          setUploadStatus(error.response?.data?.message || 'Error uploading print details. Please try again.');
-          setIsLoading(false);
-        });
-    } else {
-      setUploadStatus('Please fill in all required fields and select an image file.');
-    }
-  };
-
   const handleDeletePrint = () => {
-    if (role === 'admin' && selectedPrint) {
+    if (role === 'admin' && selectedPrint) {  
       axios
-        .delete(`https://photography-reactjs.onrender.com/prints/${selectedPrint._id}`)
+        .delete(`http://localhost:4000/prints/${selectedPrint._id}`)
         .then((response) => {
           setSelectedPrint(null);
         })
@@ -114,47 +54,13 @@ function PrintPage() {
             <button onClick={handleDeletePrint} className="bg-red-500 text-white px-4 py-2 rounded-md mr-4">Delete Print</button>
           </div>
         )}
-        {role === 'admin' && (
-          <div className='container justify-center items-center text-center mx-auto mt-12 space-x-4 '>
-            <h2>Create a Print</h2>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={handleNameChange}
-              className='w-full md:w-[500px] mb-4 '
-            />
-            <input
-              type="text"
-              placeholder="Image File Name"
-              value={imageFileName}
-              onChange={handleImageFileNameChange}
-              className='w-full md:w-[500px] mb-4'
-            />
-            <textarea
-              placeholder="Description"
-              value={description}
-              onChange={handleDescriptionChange}
-              className='w-full md:w-[500px] h-[200px] mb-4 mx-auto'
-            />
-            <input
-              type="file"
-              onChange={handleImageFileChange}
-              className='mb-4'
-            />
-            <button className='px-6 bg-gray-300 rounded-md' onClick={handlePrintUpload} disabled={isLoading}>
-              {isLoading ? 'Uploading...' : 'Upload Print'}
-            </button>
-            {uploadStatus && <p className="mt-2 text-red-500">{uploadStatus}</p>}
-          </div>
-        )}
 
         <div className="flex justify-center items-center mt-10">
           <div className="max-w-4xl  p-12 rounded-lg w-full flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-14">
             {selectedPrint && (
               <div className="w-full md:w-1/2">
                 <img
-                  src={`https://photography-reactjs.onrender.com/uploads/${selectedPrint.imageFileName}`}
+                  src={`http://localhost:4000/uploads/${selectedPrint.imageFileName}`}
                   alt=""
                   className="rounded-lg object-cover w-full h-auto md:h-[500px]"
                 />
@@ -172,8 +78,6 @@ function PrintPage() {
                 </label>
                 <select
                   id="size"
-                  value={selectedSize.name}
-                  onChange={handleSizeChange}
                   className="block text-center mb-6 mt-2 mx-auto  rounded-md border-b-2 border-black "
                 >
                   {sizes.map((size) => (

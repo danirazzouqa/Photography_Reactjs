@@ -10,20 +10,20 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [username] = useState('');
   const [role] = useState('');
-  const [error, setError] = useState(null); // State to store frontend errors
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login, isLoading } = useLogin();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null); 
     
     try {
       await login(username, email, password,role);
-      // If login is successful, navigate to WelcomePage
+      
       navigate('/WelcomePage');
     } catch (error) {
-      // If there's a frontend error, set the error state
+      
       setError(error.message);
     }
   }

@@ -7,11 +7,11 @@ const Print = require('../models/PrintsModel.jsx');
 // Multer configuration for handling file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads'); // Specify the destination folder for storing uploaded files
+    cb(null, './uploads'); 
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.originalname + '-' + uniqueSuffix); // Set the filename to be the original filename appended with a unique suffix
+    cb(null, file.originalname + '-' + uniqueSuffix); 
   }
 });
 
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
       const printName = req.query.printName;
       if (printName) {
         // If printName is provided, fetch the specific print by name
-        const selectedPrint = await Print.findOne({ name: printName }); // Find the print with the specified name
+        const selectedPrint = await Print.findOne({ name: printName }); 
         if (!selectedPrint) {
           return res.status(404).json({ error: 'Print not found' });
         }

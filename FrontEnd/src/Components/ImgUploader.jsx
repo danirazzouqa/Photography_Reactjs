@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function ImgUploader() {
-  const [files, setFiles] = useState([]); // Change to an array
+  const [files, setFiles] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState('');
 
   const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files); // Create an array from the FileList
+    const selectedFiles = Array.from(e.target.files);
     if (selectedFiles.every(file => file.type.startsWith('image/'))) {
       setFiles(selectedFiles);
       setUploadStatus('');
@@ -34,7 +34,7 @@ function ImgUploader() {
       const formData = new FormData();
 
       files.forEach(file => {
-        formData.append('files', file); // Append each file to formData
+        formData.append('files', file);
       });
       formData.append('categoryName', categoryName);
 

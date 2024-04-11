@@ -45,7 +45,7 @@ function App() {
         <Route path="/prints/:printName" element={<PrintPage />} />
       </Routes>
 
-      {/* Conditionally render the Footer based on the hideFooter variable */}
+      
       {showFooter && <Footer />}
     </div>
   );

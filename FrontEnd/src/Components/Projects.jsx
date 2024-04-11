@@ -11,7 +11,7 @@ function Projects() {
       <div className="container mx-auto h-full  ">
         <div className="w-full h-[100px]"></div>
         {/* First project */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-10 ml-4 md:ml-10 text-center items-center bg-slate-100 mr-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-10 ml-10 md:ml-10 text-center items-center bg-slate-100 mr-10 ">
           <div>
             <img
               className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px]  rounded-md object-cover shadow-lg shadow-black hover:scale-105 duration-500  mx-auto " 
@@ -43,7 +43,7 @@ function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-10 ml-4 md:ml-10 text-center items-center bg-slate-100 mr-10">
           <div className=" ml-8 p-4 md:p-8 md:order-2">
             <img
-              className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px] rounded-md   object-cover shadow-lg shadow-black hover:scale-105 duration-500  "
+              className="lg:w-[600px] lg:h-[750px] md:w-[400px] md:h-[550px] w-[350px] h-[450px] rounded-md mx-auto  object-cover shadow-lg shadow-black hover:scale-105 duration-500  "
               src={Project2}
               alt=""
             />

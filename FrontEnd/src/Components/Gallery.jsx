@@ -9,7 +9,7 @@ function Gallery() {
   useEffect(() => {
     // Fetch category data from the backend
     axios
-      .get('https://photography-reactjs.onrender.com/categories')
+      .get('http://localhost:4000/categories')
       .then((response) => {
         setCategories(response.data);
       })
@@ -33,7 +33,7 @@ function Gallery() {
          <Link to={`/Gallery/${category.name}`}>
            <div className="group flex flex-col">
              <img
-               src={`https://photography-reactjs.onrender.com/uploads/${category.imageFileName}`}
+               src={`http://localhost:4000/uploads/${category.imageFileName}`}
                alt={category.name}
                className="w-[300px] h-[450px] rounded-lg object-cover shadow-2xl"
              />

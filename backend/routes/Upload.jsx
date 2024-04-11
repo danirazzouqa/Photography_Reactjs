@@ -15,7 +15,7 @@ router.post('/', upload.array('files', 5), async (req, res) => {
     for (const file of req.files) {
       // Create a schema for each uploaded image and save it to MongoDB
       const image = new Image({
-        category: req.body.categoryName, // Assuming you pass the category name in the request body
+        category: req.body.categoryName, 
         originalFileName: file.originalname,
       });
 

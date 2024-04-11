@@ -4,7 +4,7 @@ const Print = require('../models/PrintsModel.jsx');
 const uploadPrint = async (req, res) => {
   try {
     const { name, description } = req.body;
-    const imageFileName = req.file.filename; // Get the filename of the uploaded image
+    const imageFileName = req.file.filename; 
     const print = new Print({ name, description, imageFileName });
     await print.save();
 

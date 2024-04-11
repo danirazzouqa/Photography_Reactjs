@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import NavLinksBar from '../NavLinksBar';
 import { AuthContext } from '../../context/AuthContext';
-import { v4 as uuidv4 } from 'uuid'; // Import UUID generator
+import { v4 as uuidv4 } from 'uuid'; // 
 
 function GalleryPage() {
   const { categoryName } = useParams();
@@ -18,7 +18,7 @@ function GalleryPage() {
 
   const fetchImages = useCallback(() => {
     axios
-      .get(`https://photography-reactjs.onrender.com/images?categoryName=${categoryName}`)
+      .get(`http://localhost:4000/images?categoryName=${categoryName}`)
       .then((response) => {
         setImages(response.data);
       })
@@ -51,13 +51,13 @@ function GalleryPage() {
       const formData = new FormData();
 
       files.forEach((file) => {
-        const uniqueFileName = `${uuidv4()}-${file.name}`; // Generate unique name using UUID
-        formData.append('files', file, uniqueFileName); // Append file with unique name
+        const uniqueFileName = `${uuidv4()}-${file.name}`; 
+        formData.append('files', file, uniqueFileName); 
       });
       formData.append('categoryName', categoryName);
 
       axios
-        .post('https://photography-reactjs.onrender.com/upload', formData)
+        .post('http://localhost:4000/upload', formData)
         .then((response) => {
           setUploadStatus('Images uploaded successfully!');
           fetchImages();
@@ -76,7 +76,7 @@ function GalleryPage() {
   const handleDeleteImage = (id) => {
     if (role === 'admin') {
       axios
-        .delete(`https://photography-reactjs.onrender.com/images/${id}`)
+        .delete(`http://localhost:4000/images/${id}`)
         .then((response) => {
           fetchImages();
         })
@@ -109,7 +109,7 @@ function GalleryPage() {
           {images.map((image, index) => (
             <div key={index} className="">
               <img
-                src={`https://photography-reactjs.onrender.com/uploads/${image.originalFileName}`}
+                src={`http://localhost:4000/uploads/${image.originalFileName}`}
                 alt={image.originalFileName}
                 className="w-full h-full object-cover rounded-lg shadow-2xl cursor-pointer mb-2"
                 onClick={() => openImageModal(image)}
@@ -117,7 +117,7 @@ function GalleryPage() {
               {role === 'admin' && (
                 <button
                   className="bg-red-500 text-white px-4 py-2  rounded-md"
-                  onClick={() => handleDeleteImage(image._id)} // Use _id for image id
+                  onClick={() => handleDeleteImage(image._id)} 
                 >
                   Delete
                 </button>
@@ -129,7 +129,7 @@ function GalleryPage() {
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-70 z-50">
             <div className="max-w-7xl max-h-2xl h-screen p-4 bg-transparent">
               <img
-                src={`https://photography-reactjs.onrender.com/uploads/${selectedImage.originalFileName}`}
+                src={`http://localhost:4000/uploads/${selectedImage.originalFileName}`}
                 alt={selectedImage.originalFileName}
                 className="w-full h-full object-contain rounded-sm"
               />
