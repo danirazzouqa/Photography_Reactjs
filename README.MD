@@ -3,6 +3,9 @@
 ## Introduction
 This photography portfolio web application is a specialized platform designed to showcase photographic work, share experiences through blogging, and offer prints for sale. Built on the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, this application provides a robust, scalable solution with a strong focus on aesthetics and user experience. It employs a single-admin model, allowing for streamlined content management by the photographer.
 
+![Demonstration of photography website](https://jumpshare.com/s/nYcLdyL6aXO3Nznn0j3g)
+
+
 ## Key Features
 - **Single-Admin Control**: Full control over content management, including uploading, editing, and deleting photographs, blog posts, and print sales information.
 - **Secure User Authentication**: Implements JWT for secure login sessions and content management actions.
