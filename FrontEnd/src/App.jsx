@@ -6,7 +6,6 @@ import Hero from './Hero';
 import Gallery from './Components/Gallery';
 import Projects from './Components/Projects';
 import Contact from './Components/Contact';
-import ImgUploader from './Components/ImgUploader';
 import Blog from './Components/blog';
 import GalleryPage from './Components/Gallery/GalleryPage.jsx';
 import PrintPage from './Components/Gallery/PrintPage.jsx';
@@ -39,7 +38,6 @@ function App() {
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Signup" element={<Signup/>} />
         <Route path="/prints" element={<Prints />} />
-        <Route path="/ImgUploader" element={<ImgUploader />} />
         <Route path="/WelcomePage" element={<WelcomePage />} />
         <Route path="/gallery/:categoryName" element={<GalleryPage />} />
         <Route path="/prints/:printName" element={<PrintPage />} />
