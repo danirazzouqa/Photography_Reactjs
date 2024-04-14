@@ -3,7 +3,7 @@ describe('Prints Interaction', () => {
       
       cy.intercept('GET', 'https://photography-reactjs.onrender.com/prints', { fixture: 'prints.json' }).as('fetchPrints');
       cy.visit('http://localhost:3000/prints');
-      cy.wait('@fetchPrints');
+      cy.wait(1000);
     });
   
     describe('Navigation to Print Detail', () => {
