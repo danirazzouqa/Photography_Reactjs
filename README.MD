@@ -20,3 +20,30 @@ Ensure you have Node.js and MongoDB installed on your machine. Git is also requi
 1. Clone the repository:
    ```bash
    git clone https://github.com/danirazzouqa/Photography_Reactjs.git
+
+## Technologies Used
+- **MERN Stack**: MongoDB, Express.js, React, and Node.js for a full-stack JavaScript solution.
+- **Tailwind CSS**: For styling and responsive design.
+- **Cypress**: For end-to-end testing.
+- **JWT (JSON Web Tokens)**: For secure authentication.
+
+## Project Structure
+- `backend/`: Contains the Express.js and Node.js server application, including API endpoints, models, and authentication logic.
+- `frontend/`: Contains the React application, with components, hooks, and styles for the user interface.
+- `Cypress/`: Cypress test files for end-to-end testing of the application.
+
+## Security Features
+- JWT-based authentication ensures secure access to admin functionalities.
+- Password hashing with bcrypt for secure password storage.
+
+## Image Optimization
+Utilizes Sharp for image processing, including resizing, format conversion, and optimization for web performance.
+
+## Single-Admin Model
+The application is designed around a single-admin model, providing the photographer (admin) with exclusive control over content management. This streamlined approach simplifies operations like uploading new images, managing blog posts, and updating print sale information.
+
+## Feedback and Contact Information
+Your feedback is valuable to me! If you have any suggestions, issues, or would like to get in touch, please email me at danirazzouqa@gmail.com or open an issue in the GitHub repository.
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
