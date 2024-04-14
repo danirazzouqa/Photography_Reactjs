@@ -3,7 +3,7 @@
 ## Introduction
 This photography portfolio web application is a specialized platform designed to showcase photographic work, share experiences through blogging, and offer prints for sale. Built on the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, this application provides a robust, scalable solution with a strong focus on aesthetics and user experience. It employs a single-admin model, allowing for streamlined content management by the photographer.
 
-![Demonstration of photography website](https://pouch.jumpshare.com/preview/uRKtoDhiRwNAOg_cni1DyOFY-QUyJrw9y6_dWE62tuEMZiBYTArf1t55rv3ilDVtVmZvX92g4Q2wiTiGolEU91ZPEW8mzubEDYSWsz6wjfA)
+![Demonstration of photography website](https://github.com/danirazzouqa/Photography_Reactjs/blob/main/Images/ShowCase.gif)
 
 
 ## Key Features
