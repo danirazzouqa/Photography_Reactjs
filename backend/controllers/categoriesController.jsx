@@ -18,7 +18,7 @@ const PostCategories = async (req, res) => {
 }
 
   
-  // Route to get a list of categories
+  
   const getCategories = async (req, res) => {
     try {
       // Fetch all categories including the "image" field

@@ -40,7 +40,7 @@ const getImage = async (req, res) => {
 const uploadImage = async (req, res) => {
   try {
     const { category } = req.body;
-    const imageBuffer = req.file.buffer; // Assuming multer memory storage
+    const imageBuffer = req.file.buffer;
 
     // Generate a unique filename
     const outputFileName = `${Date.now()}-${path.parse(req.file.originalname).name}.webp`;

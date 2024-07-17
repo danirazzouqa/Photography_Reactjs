@@ -19,7 +19,7 @@ function PrintPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/prints?printName=${printName}`)
+      .get(`https://photography-reactjs.onrender.com/prints?printName=${printName}`)
       .then((response) => {
         setSelectedPrint(response.data);
       })
@@ -31,7 +31,7 @@ function PrintPage() {
   const handleDeletePrint = () => {
     if (role === 'admin' && selectedPrint) {  
       axios
-        .delete(`http://localhost:4000/prints/${selectedPrint._id}`)
+        .delete(`https://photography-reactjs.onrender.com/prints/${selectedPrint._id}`)
         .then((response) => {
           setSelectedPrint(null);
         })
@@ -60,7 +60,7 @@ function PrintPage() {
             {selectedPrint && (
               <div className="w-full md:w-1/2">
                 <img
-                  src={`http://localhost:4000/uploads/${selectedPrint.imageFileName}`}
+                  src={`https://photography-reactjs.onrender.com/uploads/${selectedPrint.imageFileName}`}
                   alt=""
                   className="rounded-lg object-cover w-full h-auto md:h-[500px]"
                 />
